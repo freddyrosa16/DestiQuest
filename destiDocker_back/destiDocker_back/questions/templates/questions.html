@@ -1,0 +1,27 @@
+<!-- /root/weird/DestiQuest/DestiQuestWEB/questions.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questions Page</title>
+</head>
+<body>
+    <h1>Questions Page</h1>
+    <p>This is the questions page.</p>
+    <h2>Continente:</h2>
+    <form action="/questions/" method="post">
+        {% csrf_token %}
+        <label for="continent">Choose a continent:</label>
+        <select name="continent" id="continent">
+            <option value="Africa">Africa</option>
+            <option value="North America">North America</option>
+            <option value="South America">South America</option>
+            <option value="Asia">Asia</option>
+            <option value="Europe">Europe</option>
+            <option value="Oceania">Oceania</option>
+        </select>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

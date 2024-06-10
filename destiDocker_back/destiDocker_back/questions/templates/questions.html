@@ -9,18 +9,25 @@
 <body>
     <h1>Questions Page</h1>
     <p>This is the questions page.</p>
-    <h2>Continente:</h2>
+    <h2>Continent:</h2>
     <form action="/questions/" method="post">
         {% csrf_token %}
         <label for="continent">Choose a continent:</label>
-        <select name="continent" id="continent">
+        <select name="continent" id="continent" required>
             <option value="Africa">Africa</option>
-            <option value="North America">North America</option>
-            <option value="South America">South America</option>
+            <option value="America">America</option>
             <option value="Asia">Asia</option>
             <option value="Europe">Europe</option>
             <option value="Oceania">Oceania</option>
         </select>
+        <br>
+        <label for="weather">Choose type of weather:</label>
+        <select name="weather" id="weather" required>
+            <option value="tropical">Tropical</option>
+            <option value="hot">Hot</option>
+            <option value="cold">Cold</option>
+        </select>
+        <br>
         <input type="submit" value="Submit">
     </form>
 </body>

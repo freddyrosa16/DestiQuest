@@ -1,9 +1,11 @@
 <h1>The Results</h1>
 
 <p>{{ continent }}</p>
+<p>{{ data_continents|length }} countries</p>
 
 <ul>
-    {% for city in cities %}
-        <li>{{ city }}</li>
+    {% for city in data_continents %}
+        <li>{{ city.name.common }}
+        </li>
     {% endfor %}
 </ul>

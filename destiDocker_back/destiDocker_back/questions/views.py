@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
-import requests
-import json
+from .utils import get_countries, filter_countries, get_country_id, get_cities
 import urllib
 
 # Create your views here.
@@ -10,9 +9,13 @@ def index(request):
 def questions(request):
     if request.method == 'POST':
         continent = request.POST.get('continent')
-        weather = request.POST.get('weather')
+        weather = request.POST.getlist('weather')
+        population = request.POST.get('population')
         request.session['continent'] = continent
         request.session['weather'] = weather
+        request.session['population'] = population
+        if not weather:
+            return render(request, 'questions.html', {'error_message': 'Please select at least one weather type.'})
         return redirect('results')
     else: 
         return render(request, 'questions.html')
@@ -20,20 +23,18 @@ def questions(request):
 def results(request):
     continent = request.session.get('continent')
     weather = request.session.get('weather')
+    population = request.session.get('population')
+    url = 'https://restcountries.com/v3.1/region/'
+    countries = get_countries(url, continent)
 
-    url = f'https://restcountries.com/v3.1/region/{continent.lower()}'
+    filtered = filter_countries(countries, weather)
 
-    response = requests.get(url)
-    response.raise_for_status()  # Raises a HTTPError if the response status is 4xx, 5xx
+    names = []
+    for country in filtered:
+        names.append(country['name']['common'])
 
-    data_continents = response.json()
-    countries = [country for country in data_continents]
+    countries_id = get_country_id(names)
 
-    if weather == 'hot':
-        filtered_countries = [country for country in countries if -23.5 <= country['latlng'][0] <= 23.5]
-    elif weather == 'cold':
-        filtered_countries = [country for country in countries if country['latlng'][0] < -66.5 or country['latlng'][0] > 66.5]
-    else:  # templado 
-        filtered_countries = [country for country in countries if -66.5 < country['latlng'][0] < 66.5 and not -23.5 <= country['latlng'][0] <= 23.5]
+    filtered = get_cities(countries_id, population)
 
-    return render(request, 'results.html', {'continent': continent, 'data_continents': filtered_countries})
+    return render(request, 'results.html', {'continent': continent, 'data_continents': filtered})

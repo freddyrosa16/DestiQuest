@@ -11,9 +11,11 @@ def questions(request):
         continent = request.POST.get('continent')
         weather = request.POST.getlist('weather')
         population = request.POST.get('population')
+        many_cities = request.POST.get('many_cities')
         request.session['continent'] = continent
         request.session['weather'] = weather
         request.session['population'] = population
+        request.session['many_cities'] = many_cities
         if not weather:
             return render(request, 'questions.html', {'error_message': 'Please select at least one weather type.'})
         return redirect('results')
@@ -24,6 +26,7 @@ def results(request):
     continent = request.session.get('continent')
     weather = request.session.get('weather')
     population = request.session.get('population')
+    many_cities = request.session.get('many_cities')
     url = 'https://restcountries.com/v3.1/region/'
     countries = get_countries(url, continent)
 
@@ -35,6 +38,6 @@ def results(request):
 
     countries_id = get_country_id(names)
 
-    filtered = get_cities(countries_id, population)
+    filtered = get_cities(countries_id, population, many_cities)
 
     return render(request, 'results.html', {'continent': continent, 'data_continents': filtered})

@@ -3,10 +3,14 @@
 {% for country, cities in data_continents.items %}
     <h2 class="country-title" style="cursor: pointer;">{{ country }}</h2>
     <div class="city-info" style="display: none;">
-        {% for city in cities %}
-            <p>City: {{ city.name }}</p>
-            <p>Population: {{ city.population }}</p>
-        {% endfor %}
+        {% if cities %}
+            {% for city in cities %}
+                <h3>City: {{ city.name }}</h3>
+                <p>Population: {{ city.population }}</p>
+            {% endfor %}
+        {% else %}
+            <p>No cities found</p>
+        {% endif %}
     </div>
 {% endfor %}
 

@@ -101,7 +101,7 @@ def get_country_id(countries):
             pass
     return dict_countries
 
-def get_cities(countries, min_population):
+def get_cities(countries, min_population, many_cities):
     cities = {}
     for country, id in countries.items():
         where_dict = {
@@ -115,7 +115,7 @@ def get_cities(countries, min_population):
             }
         }
         where = urllib.parse.quote_plus(json.dumps(where_dict))
-        url = f'https://parseapi.back4app.com/classes/Continentscountriescities_City?where={where}'
+        url = f'https://parseapi.back4app.com/classes/Continentscountriescities_City?where={where}&limit={many_cities}'
         headers = {
             'X-Parse-Application-Id': 'J0N5Xu7Z4hPhdlnXEa9iK5vIXOfSxDTsEwK7nHia', # Replace with your app application id
             'X-Parse-REST-API-Key': 'nb139EQwb7s0iRfZrFye2WqLACTQL9C7cfKKMV87' # Replace with your app's REST API key

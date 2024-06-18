@@ -3,7 +3,7 @@ from .utils import get_countries, filter_countries, get_country_id, get_cities, 
 
 
 def index(request):
-    return render(request, 'questions/index.html')
+    return render(request, 'index.html')
 
 
 def questions(request):
@@ -20,9 +20,9 @@ def questions(request):
         request.session['departure_date'] = departure_date
         if not weather:
             return render(request, 'questions/questions.html', {'error_message': 'Please select at least one weather type.'})
-        return redirect('questions:results')
+        return redirect('results')
     else:
-        return render(request, 'questions/questions.html')
+        return render(request, 'questions.html')
 
 
 def results(request):
@@ -38,10 +38,10 @@ def results(request):
     countries_id = get_country_id(names)
     filtered = get_cities(countries_id, population, many_cities)
 
-    return render(request, 'questions/results.html', {'continent': continent, 'data_continents': filtered})
+    return render(request, 'results.html', {'continent': continent, 'data_continents': filtered})
 
 
 def flights(request, country_name):
     departure_date = request.session.get('departure_date')
     flights = get_flights(country_name, departure_date)
-    return render(request, 'questions/flights.html', {'country_name': country_name, 'flights': flights})
+    return render(request, 'flights.html', {'country_name': country_name, 'flights': flights})

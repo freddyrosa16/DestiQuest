@@ -91,8 +91,7 @@ def get_country_id(countries):
             "name": str(country)
         }
         where = urllib.parse.quote_plus(json.dumps(where_dict))
-        url = f'https://parseapi.back4app.com/classes/Continentscountriescities_Country?where={
-            where}'
+        url = f'https://parseapi.back4app.com/classes/Continentscountriescities_Country?where={where}'
         headers = {
             'X-Parse-Application-Id': 'J0N5Xu7Z4hPhdlnXEa9iK5vIXOfSxDTsEwK7nHia',
             'X-Parse-REST-API-Key': 'nb139EQwb7s0iRfZrFye2WqLACTQL9C7cfKKMV87'
@@ -120,8 +119,7 @@ def get_cities(countries, min_population, many_cities):
             }
         }
         where = urllib.parse.quote_plus(json.dumps(where_dict))
-        url = f'https://parseapi.back4app.com/classes/Continentscountriescities_City?where={
-            where}&limit={many_cities}'
+        url = f'https://parseapi.back4app.com/classes/Continentscountriescities_City?where={where}&limit={many_cities}'
         headers = {
             'X-Parse-Application-Id': 'J0N5Xu7Z4hPhdlnXEa9iK5vIXOfSxDTsEwK7nHia',
             'X-Parse-REST-API-Key': 'nb139EQwb7s0iRfZrFye2WqLACTQL9C7cfKKMV87'

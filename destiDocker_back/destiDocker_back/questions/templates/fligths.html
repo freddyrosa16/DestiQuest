@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flights to {{ country_name }}</title>
+</head>
+<body>
+    <h1>Flights to {{ country_name }}</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Flight Number</th>
+                <th>Departure Time</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for flight in flights %}
+            <tr>
+                <td>{{ flight.flight_number }}</td>
+                <td>{{ flight.departure_time }}</td>
+                <td>{{ flight.price }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button onclick="location.href='{% url 'results' %}'">Back to Results</button>
+</body>
+</html>

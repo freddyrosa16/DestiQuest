@@ -1,40 +1,57 @@
-<h2>Continent:</h2>
-<form action="/questions/" method="post">
-    {% csrf_token %}
-    <label for="continent">Choose a continent:</label>
-    <select name="continent" id="continent" required>
-        <option value="Africa">Africa</option>
-        <option value="America">America</option>
-        <option value="Asia">Asia</option>
-        <option value="Europe">Europe</option>
-        <option value="Oceania">Oceania</option>
-    </select>
-    <br>
-    <label>Choose type of weather:</label>
-    <br>
-    <input type="checkbox" id="tropical" name="weather" value="tropical" >
-    <label for="tropical">Tropical</label><br>
-    <input type="checkbox" id="arid" name="weather" value="arid">
-    <label for="arid">Arid</label><br>
-    <input type="checkbox" id="subtropical" name="weather" value="subtropical">
-    <label for="subtropical">SubTropical</label><br>
-    <input type="checkbox" id="temperate" name="weather" value="temperate">
-    <label for="temperate">Temperate</label><br>
-    <input type="checkbox" id="mountainous" name="weather" value="mountainous">
-    <label for="mountainous">Mountainous</label><br>
-    {% if error_message %}
-    <p style="color: red;">{{ error_message }}</p>
-    {% endif %}
-    <br>
-    <label for="population">How populated would you like the place to be?</label>
-    <select name="population" id="population" required>
-        <option value="1500">Rural Area or Small Town: Less than 20,000 people</option>
-        <option value="20000">Medium City: Between 20,000 and 1 million people</option>
-        <option value="1000000">Large City or Metropolis: More than 1 million people</option>
-    </select>
-    <br>
-    <label for='many_cities'>How many cities do you want to us recomend to you</label>
-    <input type="number" name="many_cities" id="many_cities" required>
-    <br>
-    <input type="submit" value="Submit">
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questions</title>
+</head>
+<body>
+    <h2>Continent:</h2>
+    <form action="/questions/" method="post">
+        {% csrf_token %}
+        <label for="continent">Choose a continent:</label>
+        <select name="continent" id="continent" required>
+            <option value="Africa">Africa</option>
+            <option value="Americas">Americas</option>
+            <option value="Asia">Asia</option>
+            <option value="Europe">Europe</option>
+            <option value="Oceania">Oceania</option>
+        </select>
+        <br>
+        <label>Choose type of weather:</label>
+        <br>
+        <input type="checkbox" id="tropical" name="weather" value="tropical">
+        <label for="tropical">Tropical</label><br>
+        <input type="checkbox" id="arid" name="weather" value="arid">
+        <label for="arid">Arid</label><br>
+        <input type="checkbox" id="subtropical" name="weather" value="subtropical">
+        <label for="subtropical">SubTropical</label><br>
+        <input type="checkbox" id="temperate" name="weather" value="temperate">
+        <label for="temperate">Temperate</label><br>
+        <input type="checkbox" id="mountainous" name="weather" value="mountainous">
+        <label for="mountainous">Mountainous</label><br>
+        {% if error_message %}
+        <p style="color: red;">{{ error_message }}</p>
+        {% endif %}
+        <br>
+        <label for="population">How populated would you like the place to be?</label>
+        <select name="population" id="population" required>
+            <option value="1500">Rural Area or Small Town: Less than 20,000 people</option>
+            <option value="20000">Medium City: Between 20,000 and 1 million people</option>
+            <option value="1000000">Large City or Metropolis: More than 1 million people</option>
+        </select>
+        <br>
+        <label for="many_cities">How many cities would you like to see?</label>
+        <select name="many_cities" id="many_cities" required>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+        </select>
+        <br>
+        <label for="departureDate">Select Departure Date:</label>
+        <input type="date" id="departureDate" name="departureDate" required>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

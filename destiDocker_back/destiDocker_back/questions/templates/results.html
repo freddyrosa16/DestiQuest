@@ -5,7 +5,7 @@
     <div class="city-info" style="display: none;">
         {% if cities %}
             {% for city in cities %}
-                <h3>City: {{ city.name }}</h3>
+                <h3><a href="{% url 'flights' country %}">City: {{ city.name }}</a></h3>
                 <p>Population: {{ city.population }}</p>
             {% endfor %}
         {% else %}

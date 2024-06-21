@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Flights to {{ country_name }}</title>
+    <title>Flights to {{ city_name }}, {{ country_name }}</title>
 </head>
 <body>
-    <h1>Flights to {{ country_name }}</h1>
+    <h1>Flights to {{ city_name }}, {{ country_name }}</h1>
 
-    <form method="post" action="{% url 'flights' country_name %}">
+    <form method="post" action="{% url 'flights' country_name city_name %}">
         {% csrf_token %}
         <label for="departureCity">Departure City (IATA code):</label>
         <input type="text" id="departureCity" name="departureCity" value="{{ request.session.departure_city }}" required>

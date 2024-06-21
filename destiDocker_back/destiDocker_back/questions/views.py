@@ -43,7 +43,7 @@ def results(request):
     return render(request, 'results.html', {'continent': continent, 'data_continents': filtered})
 
 
-def flights(request, country_name):
+def flights(request, country_name, city_name):
     if request.method == 'POST':
         departure_date = request.POST.get('departureDate')
         departure_city = request.POST.get('departureCity')
@@ -64,4 +64,4 @@ def flights(request, country_name):
     flights = get_flights(api_key, departure_city,
                           arrival_iata, departure_date)
     print(f"Flights: {flights}")
-    return render(request, 'flights.html', {'country_name': country_name, 'flights': flights, 'arrival_iata': arrival_iata})
+    return render(request, 'flights.html', {'country_name': country_name, 'city_name': city_name, 'flights': flights, 'arrival_iata': arrival_iata})

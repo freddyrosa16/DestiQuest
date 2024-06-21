@@ -6,7 +6,6 @@ import urllib
 def get_countries(url, country):
     response = requests.get(url + country)
     response.raise_for_status()
-
     data_continents = response.json()
     countries = [country for country in data_continents]
     return countries
@@ -91,7 +90,8 @@ def get_country_id(countries):
             "name": str(country)
         }
         where = urllib.parse.quote_plus(json.dumps(where_dict))
-        url = f'https://parseapi.back4app.com/classes/Continentscountriescities_Country?where={where}'
+        url = f'https://parseapi.back4app.com/classes/Continentscountriescities_Country?where={
+            where}'
         headers = {
             'X-Parse-Application-Id': 'J0N5Xu7Z4hPhdlnXEa9iK5vIXOfSxDTsEwK7nHia',
             'X-Parse-REST-API-Key': 'nb139EQwb7s0iRfZrFye2WqLACTQL9C7cfKKMV87'
@@ -119,7 +119,8 @@ def get_cities(countries, min_population, many_cities):
             }
         }
         where = urllib.parse.quote_plus(json.dumps(where_dict))
-        url = f'https://parseapi.back4app.com/classes/Continentscountriescities_City?where={where}&limit={many_cities}'
+        url = f'https://parseapi.back4app.com/classes/Continentscountriescities_City?where={
+            where}&limit={many_cities}'
         headers = {
             'X-Parse-Application-Id': 'J0N5Xu7Z4hPhdlnXEa9iK5vIXOfSxDTsEwK7nHia',
             'X-Parse-REST-API-Key': 'nb139EQwb7s0iRfZrFye2WqLACTQL9C7cfKKMV87'
@@ -132,67 +133,29 @@ def get_cities(countries, min_population, many_cities):
     return cities
 
 
-def get_amadeus_access_token():
-    url = "https://test.api.amadeus.com/v1/security/oauth2/token"
-    payload = f"grant_type=client_credentials&client_id=la0LIwMfXOoPdMTGl9aQEY3vP5cNBpK7&client_secret=zGrXMVj9esWgR2F1"
-    headers = {
-        'Content-Type': 'application/x-www-form-urlencoded'
-    }
-
-    response = requests.post(url, data=payload, headers=headers)
-    response.raise_for_status()
-    return response.json()['access_token']
-
-
-def get_iata_code(country_name, access_token):
-    headers = {
-        'Authorization': f'Bearer {access_token}'
-    }
-    url = "https://test.api.amadeus.com/v1/reference-data/locations"
+def get_flights(api_key, dep_iata, arr_iata, departure_date):
+    url = 'http://api.aviationstack.com/v1/flights'
     params = {
-        'keyword': country_name,
-        'subType': 'AIRPORT'
+        'access_key': api_key,
+        'dep_iata': dep_iata,
+        'arr_iata': arr_iata,
+        'flight_date': departure_date,
+        'limit': 5
     }
-
-    response = requests.get(url, headers=headers, params=params)
-    response.raise_for_status()
-
-    data = response.json()
-    if data and data['data']:
-        return data['data'][0]['iataCode']
-    return None
-
-
-def get_flights(country_name, departure_date):
-    access_token = get_amadeus_access_token()
-    headers = {
-        'Authorization': f'Bearer {access_token}'
-    }
-
-    origin_iata = 'LON'  # Default origin location code
-    destination_iata = get_iata_code(country_name, access_token)
-
-    if not destination_iata:
+    response = requests.get(url, params=params)
+    if response.status_code == 200:
+        data = response.json()
+        flights = [
+            {
+                'flight_number': flight['flight']['iata'],
+                'departure_time': flight['departure']['estimated'],
+                'arrival_airport': flight['arrival']['airport'],
+                'price': 'N/A'
+            }
+            for flight in data.get('data', [])
+        ]
+        return flights
+    else:
+        print(f"Failed to retrieve data. Status code: {response.status_code}")
+        print(f"Response: {response.text}")
         return []
-
-    url = "https://test.api.amadeus.com/v2/shopping/flight-offers"
-    params = {
-        'originLocationCode': origin_iata,
-        'destinationLocationCode': destination_iata,
-        'departureDate': departure_date,
-        'adults': 1,
-    }
-
-    response = requests.get(url, headers=headers, params=params)
-    response.raise_for_status()
-
-    data = response.json()
-    flights = [
-        {
-            'flight_number': offer['itineraries'][0]['segments'][0]['carrierCode'] + offer['itineraries'][0]['segments'][0]['number'],
-            'departure_time': offer['itineraries'][0]['segments'][0]['departure']['at'],
-            'price': offer['price']['total']
-        }
-        for offer in data['data']
-    ]
-    return flights

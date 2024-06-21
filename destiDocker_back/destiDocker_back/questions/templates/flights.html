@@ -1,30 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flights to {{ country_name }}</title>
 </head>
 <body>
     <h1>Flights to {{ country_name }}</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Flight Number</th>
-                <th>Departure Time</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for flight in flights %}
-            <tr>
-                <td>{{ flight.flight_number }}</td>
-                <td>{{ flight.departure_time }}</td>
-                <td>{{ flight.price }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <button onclick="location.href='{% url 'results' %}'">Back to Results</button>
+
+    <form method="post" action="{% url 'flights' country_name %}">
+        {% csrf_token %}
+        <label for="departureCity">Departure City (IATA code):</label>
+        <input type="text" id="departureCity" name="departureCity" value="{{ request.session.departure_city }}" required>
+        <br>
+        <label for="departureDate">Change Departure Date:</label>
+        <input type="date" id="departureDate" name="departureDate" value="{{ request.session.departure_date }}">
+        <br>
+        <input type="hidden" name="arrivalIATA" value="{{ arrival_iata }}">
+        <button type="submit">Update</button>
+    </form>
+
+    {% if flights %}
+        <ul>
+        {% for flight in flights %}
+            <li>
+                Flight Number: {{ flight.flight_number }}<br>
+                Departure Time: {{ flight.departure_time }}<br>
+                Arrival Airport: {{ flight.arrival_airport }}<br>
+                Price: {{ flight.price }}
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No flights found.</p>
+    {% endif %}
 </body>
 </html>

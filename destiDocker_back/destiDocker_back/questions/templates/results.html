@@ -5,8 +5,14 @@
     <div class="city-info" style="display: none;">
         {% if cities %}
             {% for city in cities %}
-                <h3><a href="{% url 'flights' country %}">City: {{ city.name }}</a></h3>
+                <h3><a href="{% url 'flights' country %}" onclick="event.preventDefault(); document.getElementById('flights-form-{{ forloop.counter }}').submit();">City: {{ city.name }}</a></h3>
                 <p>Population: {{ city.population }}</p>
+                <form id="flights-form-{{ forloop.counter }}" method="post" action="{% url 'flights' country %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="departureDate" value="{{ request.session.departure_date }}">
+                    <input type="hidden" name="departureCity" value="{{ request.session.departure_city }}">
+                    <input type="hidden" name="arrivalIATA" value="{{ city.iata_code }}">
+                </form>
             {% endfor %}
         {% else %}
             <p>No cities found</p>

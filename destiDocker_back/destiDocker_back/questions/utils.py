@@ -104,7 +104,7 @@ def get_country_id(countries):
     return dict_countries
 
 
-def get_cities(countries, min_population):
+def get_cities(countries, min_population, many_cities):
     cities = {}
     for country, id in countries.items():
         where_dict = {
@@ -117,8 +117,10 @@ def get_cities(countries, min_population):
                 "$gt": int(min_population)
             }
         }
+        print(many_cities)
+        limit = 10 if many_cities else 3
         where = urllib.parse.quote_plus(json.dumps(where_dict))
-        url = f'https://parseapi.back4app.com/classes/Continentscountriescities_City?where={where}&&order=-population'
+        url = f'https://parseapi.back4app.com/classes/Continentscountriescities_City?where={where}&order=-population&limit={limit}'
         headers = {
             'X-Parse-Application-Id': 'J0N5Xu7Z4hPhdlnXEa9iK5vIXOfSxDTsEwK7nHia',
             'X-Parse-REST-API-Key': 'nb139EQwb7s0iRfZrFye2WqLACTQL9C7cfKKMV87'

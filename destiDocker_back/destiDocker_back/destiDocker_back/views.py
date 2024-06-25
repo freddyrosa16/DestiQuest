@@ -1,6 +1,8 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
+from django.contrib.auth import views as auth_views
+from django.contrib.auth.signals import user_logged_in
 
 
 class RegisterView(generic.CreateView):
@@ -8,10 +10,14 @@ class RegisterView(generic.CreateView):
     success_url = reverse_lazy('login')
     template_name = 'register.html'
 
-    def get(self, request, *args, **kwargs):
-        print("RegisterView GET request")
-        return super().get(request, *args, **kwargs)
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        return response
 
-    def post(self, request, *args, **kwargs):
-        print("RegisterView POST request")
-        return super().post(request, *args, **kwargs)
+
+class CustomLoginView(auth_views.LoginView):
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        user_logged_in.send(sender=self.__class__,
+                            request=self.request, user=self.request.user)
+        return response

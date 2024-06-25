@@ -24,7 +24,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "questions",
-    "destidocker",
+    "destiDocker_back",
 ]
 
 MIDDLEWARE = [

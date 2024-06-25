@@ -1,1 +1,1 @@
-default_app_config = 'destidocker.apps.DestiDockerConfig'
+default_app_config = 'destiDocker_back.apps.DestiDockerConfig'

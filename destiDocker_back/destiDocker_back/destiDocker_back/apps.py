@@ -1,8 +1,10 @@
+# destiDocker_back/apps.py
+
 from django.apps import AppConfig
 
 
 class DestiDockerConfig(AppConfig):
-    name = 'destidocker'
+    name = 'destiDocker_back'
 
     def ready(self):
-        import destidocker.signals
+        import destiDocker_back.signals

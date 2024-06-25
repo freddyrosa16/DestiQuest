@@ -1,5 +1,3 @@
-# destiDocker_back/apps.py
-
 from django.apps import AppConfig
 
 

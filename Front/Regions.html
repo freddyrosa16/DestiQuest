@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regions - DESTIQUEST</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">  
+  <style>
+    .overlay-text-Country {
+  position: absolute;
+  top: 63%; /* Adjust this value as needed */
+  left: 50%; /* Adjust this value as needed */
+  transform: translate(-50%, -50%);
+  font-size: 20px; /* Adjust as needed */
+  z-index: 6; /* Ensure this is higher than the z-index of any underlying elements */
+  font-family: 'Press Start 2P', cursive; /* Gives the text a pixelated look */
+  color: rgb(0, 0, 0); /* Change as needed */
+  text-shadow: 2px 2px rgb(255, 255, 255); /* Change as needed */
+}
+     .overlay-text-Suburbs {
+  position: absolute;
+  top: 53%; /* Adjust this value as needed */
+  left: 50%; /* Adjust this value as needed */
+  transform: translate(-50%, -50%);
+  font-size: 20px; /* Adjust as needed */
+  z-index: 6; /* Ensure this is higher than the z-index of any underlying elements */
+  font-family: 'Press Start 2P', cursive; /* Gives the text a pixelated look */
+  color: rgb(0, 0, 0); /* Change as needed */
+  text-shadow: 2px 2px rgb(255, 255, 255); /* Change as needed */
+}
+     .overlay-text {
+  position: absolute;
+  top: 43%; /* Adjust this value as needed */
+  left: 50%; /* Adjust this value as needed */
+  transform: translate(-50%, -50%);
+  font-size: 20px; /* Adjust as needed */
+  z-index: 5; /* Ensure this is higher than the z-index of any underlying elements */
+  font-family: 'Press Start 2P', cursive; /* Gives the text a pixelated look */
+  color: rgb(0, 0, 0); /* Change as needed */
+  text-shadow: 2px 2px rgb(255, 255, 255); /* Change as needed */
+}
+    .desti-select-3 {
+  position: absolute;
+  top: 240px; /* Adjust this value as needed */
+  left: 50%; /* Adjust this value as needed */
+  transform: translate(-50%, 0);
+  z-index: 4; /* This should be higher than the z-index of the desti-back.png image */
+  width: 1300px; /* Adjust this value as needed */
+  height: auto; /* Maintains aspect ratio */
+}
+    .desti-select-2 {
+  position: absolute;
+  top: 150px; /* Adjust this value as needed */
+  left: 50%; /* Adjust this value as needed */
+  transform: translate(-50%, 0);
+  z-index: 4; /* This should be higher than the z-index of the desti-back.png image */
+  width: 1300px; /* Adjust this value as needed */
+  height: auto; /* Maintains aspect ratio */
+}
+.desti-select {
+  position: absolute;
+  top: 45%; /* Adjust this value as needed */
+  left: 50%; /* Adjust this value as needed */
+  transform: translate(-50%, -50%);
+  z-index: 2; /* This should be higher than the z-index of the desti-back.png image */
+  width: 1300px; /* Adjust this value as needed */
+  height: auto; /* Maintains aspect ratio */
+}
+#Desti-back {
+  position: absolute;
+  top: 100;
+  left: 50;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* This should be lower than the z-index values of the logo and the floor */
+}
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+#sun-image {
+  position: absolute;
+  top: -25%;
+  left: 55%;
+  z-index: 4;
+  animation: sunrays 2s infinite, shine 2s infinite, rotate 20s linear infinite;
+}  #floor-image {
+  position: relative;
+  top: -900px; /* Adjust this value to move the image up */
+  width: 111%;
+  height: auto;
+}
+.logo {
+  position: absolute;
+  z-index: 3; /* This will ensure the logo is always in front of the clouds */
+  top: 25%; /* Adjust the top and left properties as needed to position the logo */
+  left: 50%;
+  transform: translate(-50%, -50%); /* This centers the logo */
+  pointer-events: none;   /* rest of your styles */
+}
+    .cloud {
+      position: absolute;
+      animation-name: moveCloud;
+      animation-duration: 10s; /* Adjust this value to make the cloud move faster or slower */
+      animation-timing-function: linear;
+      animation-iteration-count: infinite; /* This makes the animation loop forever */
+    }
+    .cloud:nth-child(1) {
+      animation-duration: 14s;
+      animation-delay: 0s;
+    }
+    .cloud:nth-child(2) {
+      top: -20%; /* Adjust this value to move the cloud up or down */
+      animation-duration: 15s;
+      animation-delay: 0s;
+    }
+    .cloud:nth-child(3) {
+      top: 30%; /* Adjust this value to move the cloud up or down */
+      animation-duration: 16s;
+      animation-delay: 0s;
+    }
+    @keyframes moveCloud {
+      0% {
+        left: -50%;
+      }
+      100% {
+        left: 70%;
+      }
+    }
+    body {
+      font-family: 'Press Start 2P', cursive; 
+      background-color: #79c2d0; 
+      color: #ffffff;             
+      text-align: center;        
+    }
+    h1 {
+      font-size: 24px;      
+    }
+
+    button { /* Target all buttons */
+      background-color: #29abe2; 
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border: none;
+    }
+  </style>
+</head>
+
+<main>
+  <div>
+    <footer>
+  <img class="cloud" src="cloud1.png" alt="Cloud 1">
+  <img class="cloud" src="cloud1.png" alt="Cloud 2">
+  <img class="cloud" src="cloud1.png" alt="Cloud 3">
+  <img src="Desti.sun.png" alt="DESTIQUEST sun" id="sun-image">
+  <img class="logo" src="Desti.logo.png" alt="DESTIQUEST logo">
+  <img class="desti-select" src="Desti.select.png" alt="Desti Select">
+  <h1 class="overlay-text">City</h1> 
+  <h2 class="overlay-text-Suburbs">Suburbs</h2>
+  <h2 class="overlay-text-Country">Country</h2>
+  <img class="desti-select-2" src="Desti.select.png" alt="Desti Select 2">
+  <img class="desti-select-3" src="Desti.select.png" alt="Desti Select 3">
+  <img src="Desti.back.png" alt="Desti background" id="desti-back">
+  <img id="floor-image" src="Desti.floor.png" alt="DESTIQUEST floor"> 
+  </div>
+  <a href="Wheathers.html"><h1 class="overlay-text">City</h1></a>
+  <a href="Wheathers.html" ><h2 class="overlay-text-Suburbs">Suburbs</h2></a>
+  <a href="Wheathers.html"><h2 class="overlay-text-Country">Country</h2></a>
+</main>
+</footer>
+</body>
+</html>

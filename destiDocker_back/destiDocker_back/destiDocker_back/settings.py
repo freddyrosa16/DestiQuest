@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "questions",
+    "destidocker",
 ]
 
 MIDDLEWARE = [
@@ -107,3 +108,13 @@ BACK4APP_REST_API_KEY = "nb139EQwb7s0iRfZrFye2WqLACTQL9C7cfKKMV87"
 # Authentication settings
 LOGIN_REDIRECT_URL = 'questions'
 LOGOUT_REDIRECT_URL = 'login'
+
+
+# email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'destiquest1@gmail.com'
+EMAIL_HOST_PASSWORD = 'Playmaker16@'
+DEFAULT_FROM_EMAIL = 'destiquest1@gmail.com'

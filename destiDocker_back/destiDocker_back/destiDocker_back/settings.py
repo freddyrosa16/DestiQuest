@@ -13,7 +13,7 @@ SECRET_KEY = "django-insecure-qf=xg%r59&##7v(gz)k+8gi!=!c1k&ah95*c=*mafr=!6oitoq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '0.0.0.0']
 
 # Application definition
 INSTALLED_APPS = [
@@ -42,7 +42,6 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR / "templates",
             BASE_DIR / "questions" / "templates",
         ],
         'APP_DIRS': True,
@@ -56,7 +55,6 @@ TEMPLATES = [
         },
     },
 ]
-
 
 WSGI_APPLICATION = "destiDocker_back.wsgi.application"
 
@@ -103,7 +101,9 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # API Keys
-AMADEUS_API_KEY = "la0LIwMfXOoPdMTGl9aQEY3vP5cNBpK7"
-AMADEUS_API_SECRET = "zGrXMVj9esWgR2F1"
 BACK4APP_APPLICATION_ID = "J0N5Xu7Z4hPhdlnXEa9iK5vIXOfSxDTsEwK7nHia"
 BACK4APP_REST_API_KEY = "nb139EQwb7s0iRfZrFye2WqLACTQL9C7cfKKMV87"
+
+# Authentication settings
+LOGIN_REDIRECT_URL = 'questions'
+LOGOUT_REDIRECT_URL = 'login'

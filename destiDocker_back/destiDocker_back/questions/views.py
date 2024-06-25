@@ -61,6 +61,7 @@ def flights(request, country_name, city_name):
     print(f"Departure Date: {departure_date}")
 
     api_key = '3866066ab1dc76f06b0b35f3d1ba5bd5'
-    flights = get_flights(api_key, departure_city, arrival_iata, departure_date)
+    flights = get_flights(api_key, departure_city,
+                          arrival_iata, departure_date)
     print(f"Flights: {flights}")
     return render(request, 'flights.html', {'country_name': country_name, 'city_name': city_name, 'flights': flights, 'arrival_iata': arrival_iata})

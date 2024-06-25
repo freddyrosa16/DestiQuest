@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WELCOME TO DESTIQUEST</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+  <main>
+    <div>
+    <img class="cloud" src="{% static 'images/cloud1.png' %}" alt="Cloud 1">
+    <img class="cloud" src="{% static 'images/cloud1.png' %}" alt="Cloud 2">
+    <img class="cloud" src="{% static 'images/cloud1.png' %}" alt="Cloud 3">
+    <img src="{% static 'images/Desti.sun.png' %}" alt="DESTIQUEST sun" id="sun-image">
+    <img class="logo" src="{% static 'images/Desti.logo.png' %}" alt="DESTIQUEST logo">
+      <h1 class="overlay-text">WELCOME TO DESTIQUEST</h1>
+      <img src="{% static 'images/Desti.back.png' %}" alt="Desti background" id="desti-back">
+      <img id="floor-image" src="{% static 'images/Desti.floor.png' %}" alt="DESTIQUEST floor"> 
+    </div>
+    <a href="Continents.html" id="start-button">
+      <img src="{% static 'images/Desti.press.png' %}" alt="Press to start">
+      <span>Press to start</span>
+    </a>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 DESTIQUEST</p>
+  </footer>
+</body>
+</html>

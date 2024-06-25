@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WELCOME TO DESTIQUEST</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">  
-
-  <style>
-    #Desti-back {
+#Desti-back {
   position: absolute;
   top: 100;
   left: 50;
@@ -101,80 +92,50 @@
   transform: translate(-50%, -50%);
   font-size: 35px;
 }
-    body {
-      font-family: 'Press Start 2P', cursive; 
-      background-color: #79c2d0; 
-      color: #ffffff;             
-      text-align: center;        
-    }
+body {
+  font-family: 'Press Start 2P', cursive; 
+  background-color: #79c2d0; 
+  color: #ffffff;             
+  text-align: center;        
+}
 
-    h1 {
-      font-size: 24px;      
-    }
+h1 {
+  font-size: 24px;      
+}
 
-    button { /* Target all buttons */
-      background-color: #29abe2; 
-      color: white;
-      padding: 10px 20px;
-      text-decoration: none;
-      border: none;
-    }
+button { /* Target all buttons */
+  background-color: #29abe2; 
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border: none;
+}
 
-    /* Add more styles as needed */
-    header {
-        background-color: #29abe2;
-        padding: 10px 0; /* Adds padding to the top and bottom */
-      }
+/* Add more styles as needed */
+header {
+    background-color: #29abe2;
+    padding: 10px 0; /* Adds padding to the top and bottom */
+}
 
-      nav ul {
-        list-style-type: none; /* Removes bullet points */
-        margin: 0;
-        padding: 0;
-        overflow: hidden; /* Makes the list items float */
-      }
+nav ul {
+    list-style-type: none; /* Removes bullet points */
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Makes the list items float */
+}
 
-      nav ul li {
-        float: left; /* Makes the list items float */
-      }
+nav ul li {
+  float: left; /* Makes the list items float */
+}
 
-      nav ul li a {
-        display: block;
-        color: white; /* Link color */
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none; /* Removes underlines */
-      }
+nav ul li a {
+  display: block;
+  color: white; /* Link color */
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none; /* Removes underlines */
+}
 
-      nav ul li a:hover {
-        background-color: #00395c; /* Hover effect */
-      }
-
-
-  </style>
-</head>
-
-<body>
-
-
-  <main>
-    <div>
-    <img class="cloud" src="cloud1.png" alt="Cloud 1">
-    <img class="cloud" src="cloud1.png" alt="Cloud 2">
-    <img class="cloud" src="cloud1.png" alt="Cloud 3">
-    <img src="Desti.sun.png" alt="DESTIQUEST sun" id="sun-image">
-    <img class="logo" src="Desti.logo.png" alt="DESTIQUEST logo">
-      <h1 class="overlay-text">WELCOME TO DESTIQUEST</h1>
-      <img src="Desti.back.png" alt="Desti background" id="desti-back">
-      <img id="floor-image" src="Desti.floor.png" alt="DESTIQUEST floor"> 
-    </div>
-    <a href="Continents.html" id="start-button">
-      <img src="Desti.press.png" alt="Press to start">
-      <span>Press to start</span>
-    </a>
-  </main>
-
-  <footer>
-    <p>&copy; 2023 DESTIQUEST</p>
-  </footer>
-</body>
-</html>
+nav ul li a:hover {
+  background-color: #00395c; /* Hover effect */
+}

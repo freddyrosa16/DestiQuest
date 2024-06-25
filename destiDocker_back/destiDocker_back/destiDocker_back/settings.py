@@ -38,6 +38,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "destiDocker_back.urls"
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'questions', 'static'),
+]
 
 TEMPLATES = [
     {

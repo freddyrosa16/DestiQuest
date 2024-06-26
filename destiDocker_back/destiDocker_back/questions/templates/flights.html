@@ -45,7 +45,8 @@
     <form method="post" action="{% url 'flights' country_name city_name %}">
         {% csrf_token %}
         <label for="departureCity">Departure City (IATA code):</label>
-        <input type="text" id="departureCity" name="departureCity" value="{{ request.session.departure_city }}" required>
+        <input type="text" id="departureCityInput" name="departureCityInput" value="{{ request.session.departure_city }}" required>
+        <input type="hidden" id="departureCity" name="departureCity" value="{{ request.session.departure_city }}">
         <br>
         <label for="departureDate">Change Departure Date:</label>
         <input type="date" id="departureDate" name="departureDate" value="{{ request.session.departure_date }}">

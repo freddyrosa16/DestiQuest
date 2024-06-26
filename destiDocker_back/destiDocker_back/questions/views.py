@@ -1,9 +1,9 @@
-# views.py
 import logging
 from django.shortcuts import render, redirect
 from .utils import get_countries, filter_countries, get_country_id, get_cities, get_flights
 import requests
 from django.conf import settings
+from datetime import datetime, timedelta
 
 logger = logging.getLogger(__name__)
 
@@ -29,7 +29,7 @@ def questions(request):
         request.session['return_date'] = return_date
         request.session['departure_city'] = departure_city
         if not weather:
-            return render(request, 'questions/questions.html', {'error_message': 'Please select at least one weather type.'})
+            return render(request, 'questions.html', {'error_message': 'Please select at least one weather type.'})
         return redirect('results')
     else:
         return render(request, 'questions.html')
@@ -66,6 +66,11 @@ def flights(request, country_name, city_name):
         return_date = request.session.get('return_date')
         departure_city = request.session.get('departure_city')
         arrival_iata = request.session.get('arrival_iata')
+
+    if not departure_date:
+        departure_date = (datetime.now() + timedelta(days=7)
+                          ).strftime('%Y-%m-%d')
+        request.session['departure_date'] = departure_date
 
     api_key = settings.AVIATIONSTACK_API_KEY
 
@@ -138,6 +143,8 @@ def select_flight(request):
         arrival_time = request.POST.get('arrival_time')
         departure_airport = request.POST.get('departure_airport')
         arrival_airport = request.POST.get('arrival_airport')
+        arrival_country_name = request.POST.get('arrival_country_name')
+        arrival_city_name = request.POST.get('arrival_city_name')
 
         # Store selected flight details in session
         request.session['selected_flight'] = {
@@ -148,7 +155,12 @@ def select_flight(request):
             'arrival_airport': arrival_airport
         }
 
+        # Set arrival country and city names in session
+        request.session['arrival_country_name'] = arrival_country_name
+        request.session['arrival_city_name'] = arrival_city_name
+
         # Redirect to the return flights selection page
-        return redirect('flights', country_name=request.session.get('arrival_country_name'), city_name=request.session.get('arrival_city_name'))
+        if arrival_country_name and arrival_city_name:
+            return redirect('flights', country_name=arrival_country_name, city_name=arrival_city_name)
 
     return redirect('index')

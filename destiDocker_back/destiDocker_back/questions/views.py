@@ -4,6 +4,9 @@ from .utils import get_countries, filter_countries, get_country_id, get_cities, 
 import requests
 from django.conf import settings
 from datetime import datetime, timedelta
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+from .models import Booking
 
 logger = logging.getLogger(__name__)
 
@@ -164,3 +167,46 @@ def select_flight(request):
             return redirect('flights', country_name=arrival_country_name, city_name=arrival_city_name)
 
     return redirect('index')
+
+
+@login_required
+def book_flight(request):
+    if request.method == 'POST':
+        flight_number = request.POST.get('flight_number')
+        departure_time = request.POST.get('departure_time')
+        arrival_time = request.POST.get('arrival_time')
+        departure_airport = request.POST.get('departure_airport')
+        arrival_airport = request.POST.get('arrival_airport')
+        price = request.POST.get('price')
+
+        booking = Booking.objects.create(
+            user=request.user,
+            flight_number=flight_number,
+            departure_time=departure_time,
+            arrival_time=arrival_time,
+            departure_airport=departure_airport,
+            arrival_airport=arrival_airport,
+            price=price
+        )
+
+        return redirect('payment', booking_id=booking.id)
+
+    return redirect('index')
+
+
+@login_required
+def payment(request, booking_id):
+    booking = Booking.objects.get(id=booking_id)
+    if request.method == 'POST':
+        # Simulate payment processing
+        booking.paid = True
+        booking.save()
+        return redirect('booking_confirmation', booking_id=booking.id)
+
+    return render(request, 'payment.html', {'booking': booking})
+
+
+@login_required
+def booking_confirmation(request, booking_id):
+    booking = Booking.objects.get(id=booking_id)
+    return render(request, 'booking_confirmation.html', {'booking': booking})

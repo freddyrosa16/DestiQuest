@@ -4,6 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Questions</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <style>
+        .autocomplete-suggestions {
+            border: 1px solid #e0e0e0;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        .autocomplete-suggestion {
+            padding: 8px;
+            cursor: pointer;
+            background-color: #fff;
+        }
+        .autocomplete-suggestion:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
 </head>
 <body>
     <h2>Continent:</h2>
@@ -48,13 +64,49 @@
             <option value="20">20</option>
         </select>
         <br>
-        <label for="departureCity">Departure City (IATA code):</label>
-        <input type="text" id="departureCity" name="departureCity" required>
+        <label for="departureCity">Departure City (Type to search):</label>
+        <input type="text" id="departureCityInput" name="departureCityInput" required>
+        <input type="hidden" id="departureCity" name="departureCity" required>
+        <div id="autocomplete-suggestions" class="autocomplete-suggestions"></div>
         <br>
         <label for="departureDate">Select Departure Date:</label>
         <input type="date" id="departureDate" name="departureDate" required>
         <br>
         <input type="submit" value="Submit">
     </form>
+
+    <script>
+        $(document).ready(function() {
+            $("#departureCityInput").on("input", function() {
+                var query = $(this).val();
+                if (query.length > 2) {
+                    $.ajax({
+                        url: "/get-iata-codes/",
+                        data: {
+                            'query': query
+                        },
+                        success: function(data) {
+                            var suggestions = data.suggestions;
+                            $("#autocomplete-suggestions").empty();
+                            suggestions.forEach(function(suggestion) {
+                                var div = $("<div class='autocomplete-suggestion'></div>").text(suggestion.city_name + " (" + suggestion.iata_code + ")");
+                                div.data("iata_code", suggestion.iata_code);
+                                $("#autocomplete-suggestions").append(div);
+                            });
+                        }
+                    });
+                } else {
+                    $("#autocomplete-suggestions").empty();
+                }
+            });
+
+            $(document).on("click", ".autocomplete-suggestion", function() {
+                var iata_code = $(this).data("iata_code");
+                $("#departureCity").val(iata_code);
+                $("#departureCityInput").val($(this).text());
+                $("#autocomplete-suggestions").empty();
+            });
+        });
+    </script>
 </body>
 </html>

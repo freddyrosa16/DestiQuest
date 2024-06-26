@@ -18,7 +18,6 @@ class RegisterView(generic.CreateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        # User will be saved to the database here.
         return response
 
 

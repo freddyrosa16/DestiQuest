@@ -2,6 +2,41 @@
 <html>
 <head>
     <title>Flights to {{ city_name }}, {{ country_name }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .flight-card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            background-color: #f9f9f9;
+        }
+        .flight-info {
+            margin-bottom: 10px;
+        }
+        .flight-info strong {
+            display: inline-block;
+            width: 150px;
+        }
+        .choose-button {
+            display: block;
+            text-align: center;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .choose-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
     <h1>Flights to {{ city_name }}, {{ country_name }}</h1>
@@ -18,17 +53,46 @@
         <button type="submit">Update</button>
     </form>
 
+    <h2>Departure Information</h2>
+    <p><strong>Country:</strong> {{ departure_country.country_name }}</p>
+    <p><strong>City:</strong> {{ departure_city.city_name }}</p>
+
     {% if flights %}
-        <ul>
+        <h2>Scheduled and Active Flights</h2>
+        <div>
         {% for flight in flights %}
-            <li>
-                Flight Number: {{ flight.flight_number }}<br>
-                Departure Time: {{ flight.departure_time }}<br>
-                Arrival Airport: {{ flight.arrival_airport }}<br>
-                Price: {{ flight.price }}
-            </li>
+            <div class="flight-card">
+                <div class="flight-info">
+                    <strong>Flight Number:</strong> {{ flight.flight.iata }}
+                </div>
+                <div class="flight-info">
+                    <strong>Airline:</strong> {{ flight.airline.name }}
+                </div>
+                <div class="flight-info">
+                    <strong>Status:</strong> {{ flight.flight_status }}
+                </div>
+                <div class="flight-info">
+                    <strong>Departure:</strong> {{ flight.departure.scheduled }}
+                </div>
+                <div class="flight-info">
+                    <strong>Arrival:</strong> {{ flight.arrival.scheduled }}
+                </div>
+                <div class="flight-info">
+                    <strong>Departure Airport:</strong> {{ flight.departure.airport }} ({{ flight.departure.iata }})
+                </div>
+                <div class="flight-info">
+                    <strong>Arrival Airport:</strong> {{ flight.arrival.airport }} ({{ flight.arrival.iata }})
+                </div>
+                <form method="post" action="{% url 'flights' country_name city_name %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="departureDate" value="{{ request.session.departure_date }}">
+                    <input type="hidden" name="departureCity" value="{{ request.session.departure_city }}">
+                    <input type="hidden" name="arrivalIATA" value="{{ flight.arrival.iata }}">
+                    <button type="submit" class="choose-button">Choose Return Flight</button>
+                </form>
+            </div>
         {% endfor %}
-        </ul>
+        </div>
     {% else %}
         <p>No flights found.</p>
     {% endif %}

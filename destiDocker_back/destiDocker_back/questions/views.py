@@ -1,5 +1,10 @@
+import logging
 from django.shortcuts import render, redirect
 from .utils import get_countries, filter_countries, get_country_id, get_cities, get_flights
+import requests
+from django.conf import settings
+
+logger = logging.getLogger(__name__)
 
 
 def index(request):
@@ -56,12 +61,65 @@ def flights(request, country_name, city_name):
         departure_city = request.session.get('departure_city')
         arrival_iata = request.session.get('arrival_iata')
 
-    print(f"Departure City: {departure_city}")
-    print(f"Arrival IATA: {arrival_iata}")
-    print(f"Departure Date: {departure_date}")
+    api_key = settings.AVIATIONSTACK_API_KEY
 
-    api_key = '3866066ab1dc76f06b0b35f3d1ba5bd5'
-    flights = get_flights(api_key, departure_city,
-                          arrival_iata, departure_date)
-    print(f"Flights: {flights}")
-    return render(request, 'flights.html', {'country_name': country_name, 'city_name': city_name, 'flights': flights, 'arrival_iata': arrival_iata})
+    try:
+        # Fetch country information
+        country_url = 'http://api.aviationstack.com/v1/countries'
+        country_params = {
+            'access_key': api_key,
+            'limit': 1,
+            'search': country_name
+        }
+        country_response = requests.get(country_url, params=country_params)
+        country_response.raise_for_status()
+        country_data_list = country_response.json().get('data', [])
+        if not country_data_list:
+            return render(request, 'flights.html', {
+                'error_message': 'No country information found.'
+            })
+        country_data = country_data_list[0]
+
+        # Fetch city information
+        city_url = 'http://api.aviationstack.com/v1/cities'
+        city_params = {
+            'access_key': api_key,
+            'limit': 1,
+            'search': city_name
+        }
+        city_response = requests.get(city_url, params=city_params)
+        city_response.raise_for_status()
+        city_data_list = city_response.json().get('data', [])
+        if not city_data_list:
+            return render(request, 'flights.html', {
+                'error_message': 'No city information found.'
+            })
+        city_data = city_data_list[0]
+
+        # Fetch flight information
+        flight_url = 'http://api.aviationstack.com/v1/flights'
+        flight_params = {
+            'access_key': api_key,
+            'dep_iata': departure_city,
+            'arr_iata': arrival_iata,
+            'flight_date': departure_date,
+            'limit': 10
+        }
+        flight_response = requests.get(flight_url, params=flight_params)
+        flight_response.raise_for_status()
+        flights_data = flight_response.json().get('data', [])
+
+    except requests.RequestException as e:
+        logger.error(f"Error fetching data from API: {e}")
+        return render(request, 'flights.html', {
+            'error_message': 'There was an error retrieving flight data. Please try again later.'
+        })
+
+    return render(request, 'flights.html', {
+        'country_name': country_data['country_name'],
+        'city_name': city_data['city_name'],
+        'departure_country': country_data,
+        'departure_city': city_data,
+        'flights': flights_data,
+        'arrival_iata': arrival_iata
+    })

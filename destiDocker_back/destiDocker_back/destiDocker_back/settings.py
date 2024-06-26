@@ -46,9 +46,7 @@ STATICFILES_DIRS = [
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            BASE_DIR / "questions" / "templates",
-        ],
+        'DIRS': [BASE_DIR / 'templates'],  # Adjust this path if necessary
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -60,6 +58,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = "destiDocker_back.wsgi.application"
 

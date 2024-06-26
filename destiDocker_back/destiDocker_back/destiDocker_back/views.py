@@ -1,5 +1,3 @@
-# destiDocker_back/views.py
-
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from questions.utils import get_countries, filter_countries, get_country_id, get_cities, get_flights  # Updated import

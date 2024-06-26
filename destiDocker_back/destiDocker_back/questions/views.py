@@ -3,7 +3,7 @@ from .utils import get_countries, filter_countries, get_country_id, get_cities, 
 
 
 def index(request):
-    return render(request, 'main.html')
+    return render(request, 'index.html')
 
 
 def questions(request):

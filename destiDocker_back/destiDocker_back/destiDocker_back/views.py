@@ -1,3 +1,5 @@
+# ~/DestiQuest/destiDocker_back/destiDocker_back/views.py
+
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from questions.utils import get_countries, filter_countries, get_country_id, get_cities, get_flights  # Updated import
@@ -48,3 +50,33 @@ class IATACodeAutocomplete(View):
             ]
             return JsonResponse({'suggestions': suggestions})
         return JsonResponse({'suggestions': []})
+
+
+def select_flight(request):
+    if request.method == 'POST':
+        flight_number = request.POST.get('flight_number')
+        departure_time = request.POST.get('departure_time')
+        arrival_time = request.POST.get('arrival_time')
+        departure_airport = request.POST.get('departure_airport')
+        arrival_airport = request.POST.get('arrival_airport')
+        arrival_country_name = request.POST.get('arrival_country_name')
+        arrival_city_name = request.POST.get('arrival_city_name')
+
+        # Store selected flight details in session
+        request.session['selected_flight'] = {
+            'flight_number': flight_number,
+            'departure_time': departure_time,
+            'arrival_time': arrival_time,
+            'departure_airport': departure_airport,
+            'arrival_airport': arrival_airport
+        }
+
+        # Set arrival country and city names in session
+        request.session['arrival_country_name'] = arrival_country_name
+        request.session['arrival_city_name'] = arrival_city_name
+
+        # Redirect to the return flights selection page
+        if arrival_country_name and arrival_city_name:
+            return redirect('flights', country_name=arrival_country_name, city_name=arrival_city_name)
+
+    return redirect('index')

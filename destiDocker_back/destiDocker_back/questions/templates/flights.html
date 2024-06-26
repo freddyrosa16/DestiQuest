@@ -1,3 +1,4 @@
+<!-- flights.html -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,7 +50,12 @@
         <label for="departureDate">Change Departure Date:</label>
         <input type="date" id="departureDate" name="departureDate" value="{{ request.session.departure_date }}">
         <br>
+        <label for="returnDate">Change Return Date:</label>
+        <input type="date" id="returnDate" name="returnDate" value="{{ request.session.return_date }}">
+        <br>
         <input type="hidden" name="arrivalIATA" value="{{ arrival_iata }}">
+        <input type="hidden" name="arrival_country_name" value="{{ country_name }}">
+        <input type="hidden" name="arrival_city_name" value="{{ city_name }}">
         <button type="submit">Update</button>
     </form>
 
@@ -83,12 +89,16 @@
                 <div class="flight-info">
                     <strong>Arrival Airport:</strong> {{ flight.arrival.airport }} ({{ flight.arrival.iata }})
                 </div>
-                <form method="post" action="{% url 'flights' country_name city_name %}">
+                <form method="post" action="{% url 'select_flight' %}">
                     {% csrf_token %}
-                    <input type="hidden" name="departureDate" value="{{ request.session.departure_date }}">
-                    <input type="hidden" name="departureCity" value="{{ request.session.departure_city }}">
-                    <input type="hidden" name="arrivalIATA" value="{{ flight.arrival.iata }}">
-                    <button type="submit" class="choose-button">Choose Return Flight</button>
+                    <input type="hidden" name="flight_number" value="{{ flight.flight.iata }}">
+                    <input type="hidden" name="departure_time" value="{{ flight.departure.scheduled }}">
+                    <input type="hidden" name="arrival_time" value="{{ flight.arrival.scheduled }}">
+                    <input type="hidden" name="departure_airport" value="{{ flight.departure.airport }}">
+                    <input type="hidden" name="arrival_airport" value="{{ flight.arrival.airport }}">
+                    <input type="hidden" name="arrival_country_name" value="{{ country_name }}">
+                    <input type="hidden" name="arrival_city_name" value="{{ city_name }}">
+                    <button type="submit" class="choose-button">Choose This Flight</button>
                 </form>
             </div>
         {% endfor %}

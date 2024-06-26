@@ -1,3 +1,4 @@
+# views.py
 import logging
 from django.shortcuts import render, redirect
 from .utils import get_countries, filter_countries, get_country_id, get_cities, get_flights
@@ -18,12 +19,14 @@ def questions(request):
         population = request.POST.get('population')
         many_cities = request.POST.get('many_cities')
         departure_date = request.POST.get('departureDate')
+        return_date = request.POST.get('returnDate')
         departure_city = request.POST.get('departureCity')
         request.session['continent'] = continent
         request.session['weather'] = weather
         request.session['population'] = population
         request.session['many_cities'] = many_cities
         request.session['departure_date'] = departure_date
+        request.session['return_date'] = return_date
         request.session['departure_city'] = departure_city
         if not weather:
             return render(request, 'questions/questions.html', {'error_message': 'Please select at least one weather type.'})
@@ -51,13 +54,16 @@ def results(request):
 def flights(request, country_name, city_name):
     if request.method == 'POST':
         departure_date = request.POST.get('departureDate')
+        return_date = request.POST.get('returnDate')
         departure_city = request.POST.get('departureCity')
         arrival_iata = request.POST.get('arrivalIATA')
         request.session['departure_date'] = departure_date
+        request.session['return_date'] = return_date
         request.session['departure_city'] = departure_city
         request.session['arrival_iata'] = arrival_iata
     else:
         departure_date = request.session.get('departure_date')
+        return_date = request.session.get('return_date')
         departure_city = request.session.get('departure_city')
         arrival_iata = request.session.get('arrival_iata')
 
@@ -123,3 +129,26 @@ def flights(request, country_name, city_name):
         'flights': flights_data,
         'arrival_iata': arrival_iata
     })
+
+
+def select_flight(request):
+    if request.method == 'POST':
+        flight_number = request.POST.get('flight_number')
+        departure_time = request.POST.get('departure_time')
+        arrival_time = request.POST.get('arrival_time')
+        departure_airport = request.POST.get('departure_airport')
+        arrival_airport = request.POST.get('arrival_airport')
+
+        # Store selected flight details in session
+        request.session['selected_flight'] = {
+            'flight_number': flight_number,
+            'departure_time': departure_time,
+            'arrival_time': arrival_time,
+            'departure_airport': departure_airport,
+            'arrival_airport': arrival_airport
+        }
+
+        # Redirect to the return flights selection page
+        return redirect('flights', country_name=request.session.get('arrival_country_name'), city_name=request.session.get('arrival_city_name'))
+
+    return redirect('index')

@@ -117,7 +117,6 @@ def get_cities(countries, min_population, many_cities):
                 "$gt": int(min_population)
             }
         }
-        print(many_cities)
         limit = 10 if many_cities else 3
         where = urllib.parse.quote_plus(json.dumps(where_dict))
         url = f'https://parseapi.back4app.com/classes/Continentscountriescities_City?where={where}&order=-population&limit={limit}'
@@ -159,3 +158,22 @@ def get_flights(api_key, dep_iata, arr_iata, departure_date):
         print(f"Failed to retrieve data. Status code: {response.status_code}")
         print(f"Response: {response.text}")
         return []
+
+def get_airports(country, city):
+    if country == 'US':
+        api_url = 'https://api.api-ninjas.com/v1/airports?city={}'.format(city, 'International')
+        response = requests.get(api_url, headers={'X-Api-Key': 'e05Mw921/fGtzcIw08mVvw==1LhUMEen5QY4OMJs'})
+        if response.status_code == requests.codes.ok:
+            airports = response.json()
+        else:
+            print("Error:", response.status_code, response.text)
+    else:
+        api_url = 'https://api.api-ninjas.com/v1/airports?country={}&name={}'.format(country, 'International')
+        response = requests.get(api_url, headers={'X-Api-Key': 'e05Mw921/fGtzcIw08mVvw==1LhUMEen5QY4OMJs'})
+        if response.status_code == requests.codes.ok:
+            airports = response.json()
+        else:
+            print("Error:", response.status_code, response.text)
+    for airport in airports:
+        print(airport['name'], airport['city'], airport['country'])
+        print('\n')

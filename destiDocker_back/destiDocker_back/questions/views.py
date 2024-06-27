@@ -1,6 +1,6 @@
 import logging
 from django.shortcuts import render, redirect
-from .utils import get_countries, filter_countries, get_country_id, get_cities, get_flights
+from .utils import get_countries, filter_countries, get_country_id, get_cities, get_airports
 import requests
 from django.conf import settings
 from datetime import datetime, timedelta
@@ -79,20 +79,29 @@ def flights(request, country_name, city_name):
 
     try:
         # Fetch country information
-        country_url = 'http://api.aviationstack.com/v1/countries'
-        country_params = {
-            'access_key': api_key,
-            'limit': 1,
-            'search': country_name
-        }
-        country_response = requests.get(country_url, params=country_params)
-        country_response.raise_for_status()
-        country_data_list = country_response.json().get('data', [])
-        if not country_data_list:
-            return render(request, 'flights.html', {
-                'error_message': 'No country information found.'
-            })
-        country_data = country_data_list[0]
+        if country_name == 'United States':
+            country_data = {
+                'country_name': 'United States',
+                'country_iso2': 'US'
+            }
+            get_airports(country_data['country_iso2'], city_name)
+        else:
+            country_url = 'http://api.aviationstack.com/v1/countries'
+            country_params = {
+                'access_key': api_key,
+                'limit': 1,
+                'search': country_name
+            }
+            country_response = requests.get(country_url, params=country_params)
+            country_response.raise_for_status()
+            country_data_list = country_response.json().get('data', [])
+            if not country_data_list:
+                return render(request, 'flights.html', {
+                    'error_message': 'No country information found.'
+                })
+            country_data = country_data_list[0]
+
+            get_airports(country_data['country_iso2'], city_name)
 
         # Fetch city information
         city_url = 'http://api.aviationstack.com/v1/cities'

@@ -2,74 +2,15 @@
 <html>
 <head>
     <title>Flights to {{ city_name }}, {{ country_name }}</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            margin: 0;
-            padding: 20px;
-        }
-        h1, h2 {
-            color: #333;
-            text-align: center;
-        }
-        .flight-card {
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .flight-info {
-            margin-bottom: 10px;
-            flex: 1;
-        }
-        .flight-info strong {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .flight-details {
-            flex: 3;
-        }
-        .flight-details div {
-            margin-bottom: 10px;
-        }
-        .choose-button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .choose-button:hover {
-            background-color: #0056b3;
-        }
-        .flight-price {
-            font-size: 1.5em;
-            color: #28a745;
-        }
-        .form-inline {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .form-inline label {
-            margin-right: 10px;
-        }
-        .form-inline input[type="text"],
-        .form-inline input[type="date"] {
-            padding: 5px;
-            margin-right: 10px;
-            flex: 1;
-        }
-    </style>
+    <link rel="stylesheet" href="flights.css">
+    <link rel="stylesheet" href="banner.css">  </head>
+
+    <header class="header">
+        <div class="banner">
+          <img src="" alt="Banner Image">
+        </div>
+        </header>
+
 </head>
 <body>
     <h1>Flights to {{ city_name }}, {{ country_name }}</h1>

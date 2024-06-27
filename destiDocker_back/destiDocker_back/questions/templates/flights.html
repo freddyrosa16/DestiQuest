@@ -2,12 +2,13 @@
 <html>
 <head>
     <title>Flights to {{ city_name }}, {{ country_name }}</title>
-    <link rel="stylesheet" href="flights.css">
-    <link rel="stylesheet" href="banner.css">  </head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/flights.css' %}">
+</head>
 
     <header class="header">
         <div class="banner">
-          <img src="" alt="Banner Image">
+            <img rel="stylesheet" src="{% static 'images/banner1.jpg' %}">
         </div>
         </header>
 

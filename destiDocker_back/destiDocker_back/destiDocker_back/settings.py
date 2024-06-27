@@ -37,6 +37,16 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+FIREBASE_CONFIG = {
+    'apiKey': "AIzaSyB5jTn1rm1ZK76d40GZMH_mOk7qvBv9_lI",
+    'authDomain': "YOUR_PROJECT_ID.firebaseapp.com",
+    'databaseURL': "https://YOUR_PROJECT_ID.firebaseio.com",
+    'projectId': "destiquest-48136",
+    'storageBucket': "YOUR_PROJECT_ID.appspot.com",
+    'messagingSenderId': "YOUR_MESSAGING_SENDER_ID",
+    'appId': "YOUR_APP_ID"
+}
+
 ROOT_URLCONF = "destiDocker_back.urls"
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [

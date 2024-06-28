@@ -161,7 +161,7 @@ def get_flights(api_key, dep_iata, arr_iata, departure_date):
 
 def get_airports(country, city):
     if country == 'US':
-        api_url = 'https://api.api-ninjas.com/v1/airports?city={}'.format(city, 'International')
+        api_url = 'https://api.api-ninjas.com/v1/airports?city={}&name={}'.format(city, 'International')
         response = requests.get(api_url, headers={'X-Api-Key': 'e05Mw921/fGtzcIw08mVvw==1LhUMEen5QY4OMJs'})
         if response.status_code == requests.codes.ok:
             airports = response.json()

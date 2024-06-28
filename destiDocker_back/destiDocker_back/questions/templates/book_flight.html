@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Flight</title>
+</head>
+<body>
+    <h1>Book Your Flight</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="question">Question:</label>
+        <textarea id="question" name="question" required></textarea><br><br>
+
+        <label for="answer">Answer:</label>
+        <textarea id="answer" name="answer" required></textarea><br><br>
+
+        <button type="submit">Book Flight</button>
+    </form>
+</body>
+</html>

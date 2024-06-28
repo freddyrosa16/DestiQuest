@@ -167,6 +167,13 @@ def get_airports(country, city):
             airports = response.json()
         else:
             print("Error:", response.status_code, response.text)
+        if not airports:
+            api_url = 'https://api.api-ninjas.com/v1/airports?region={}&name={}'.format(city, 'International')
+            response = requests.get(api_url, headers={'X-Api-Key': 'e05Mw921/fGtzcIw08mVvw==1LhUMEen5QY4OMJs'})
+            if response.status_code == requests.codes.ok:
+                airports = response.json()
+            else:
+                print("Error:", response.status_code, response.text)
     else:
         api_url = 'https://api.api-ninjas.com/v1/airports?country={}&name={}'.format(country, 'International')
         response = requests.get(api_url, headers={'X-Api-Key': 'e05Mw921/fGtzcIw08mVvw==1LhUMEen5QY4OMJs'})
@@ -174,6 +181,10 @@ def get_airports(country, city):
             airports = response.json()
         else:
             print("Error:", response.status_code, response.text)
-    for airport in airports:
-        print(airport['name'], airport['city'], airport['country'])
-        print('\n')
+    
+    airports_filtered = [airport for airport in airports if airport['city'] == city]
+    if airports_filtered:
+        print(airports_filtered)
+        return airports_filtered
+    print(airports)
+    return airports

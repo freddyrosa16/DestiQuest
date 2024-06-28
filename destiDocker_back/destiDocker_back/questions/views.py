@@ -70,11 +70,6 @@ def flights(request, country_name, city_name):
         departure_city = request.session.get('departure_city')
         arrival_iata = request.session.get('arrival_iata')
 
-    if not departure_date:
-        departure_date = (datetime.now() + timedelta(days=7)
-                          ).strftime('%Y-%m-%d')
-        request.session['departure_date'] = departure_date
-
     api_key = settings.AVIATIONSTACK_API_KEY
 
     try:
@@ -84,7 +79,7 @@ def flights(request, country_name, city_name):
                 'country_name': 'United States',
                 'country_iso2': 'US'
             }
-            get_airports(country_data['country_iso2'], city_name)
+            airports = get_airports(country_data['country_iso2'], city_name)
         else:
             country_url = 'http://api.aviationstack.com/v1/countries'
             country_params = {
@@ -101,32 +96,15 @@ def flights(request, country_name, city_name):
                 })
             country_data = country_data_list[0]
 
-            get_airports(country_data['country_iso2'], city_name)
-
-        # Fetch city information
-        city_url = 'http://api.aviationstack.com/v1/cities'
-        city_params = {
-            'access_key': api_key,
-            'limit': 1,
-            'search': city_name
-        }
-        city_response = requests.get(city_url, params=city_params)
-        city_response.raise_for_status()
-        city_data_list = city_response.json().get('data', [])
-        if not city_data_list:
-            return render(request, 'flights.html', {
-                'error_message': 'No city information found.'
-            })
-        city_data = city_data_list[0]
+            airports = get_airports(country_data['country_iso2'], city_name)
 
         # Fetch flight information
         flight_url = 'http://api.aviationstack.com/v1/flights'
         flight_params = {
             'access_key': api_key,
             'dep_iata': departure_city,
-            'arr_iata': arrival_iata,
-            'flight_date': departure_date,
-            'limit': 10
+            'arr_iata': airports[0]['iata'],
+            'flight_status': 'scheduled',
         }
         flight_response = requests.get(flight_url, params=flight_params)
         flight_response.raise_for_status()
@@ -140,11 +118,11 @@ def flights(request, country_name, city_name):
 
     return render(request, 'flights.html', {
         'country_name': country_data['country_name'],
-        'city_name': city_data['city_name'],
+        'city_name': city_name,
         'departure_country': country_data,
-        'departure_city': city_data,
+        'departure_city': city_name,
         'flights': flights_data,
-        'arrival_iata': arrival_iata
+        'arrival_iata': airports[0]['iata']
     })
 
 

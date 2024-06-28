@@ -48,7 +48,7 @@ def filter_countries(countries, weather):
         'subtropical': [
             "Saint Martin", "Turks and Caicos Islands", "Aruba", "Puerto Rico",
             "Honduras", "Ecuador", "Guatemala", "Cayman Islands",
-            "Curaçao", "Montserrat", "Canada", "Uruguay", "Peru",
+            "Curaçao", "Montserrat", "Uruguay", "Peru",
             "United States Minor Outlying Islands", "Chile",
             "French Guiana", "Saint Barthélemy", "Anguilla", "Israel", "Georgia",
             "Australia", "New Zealand"
@@ -184,7 +184,5 @@ def get_airports(country, city):
     
     airports_filtered = [airport for airport in airports if airport['city'] == city]
     if airports_filtered:
-        print(airports_filtered)
         return airports_filtered
-    print(airports)
     return airports

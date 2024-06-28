@@ -105,6 +105,7 @@ def flights(request, country_name, city_name):
             'dep_iata': departure_city,
             'arr_iata': airports[0]['iata'],
             'flight_status': 'scheduled',
+            'limit': 5,
         }
         flight_response = requests.get(flight_url, params=flight_params)
         flight_response.raise_for_status()

@@ -186,3 +186,10 @@ def get_airports(country, city):
     if airports_filtered:
         return airports_filtered
     return airports
+
+def get_city_depp(city):
+    api_url = 'https://api.api-ninjas.com/v1/airports?iata={}&name={}'.format(city, 'International')
+    response = requests.get(api_url, headers={'X-Api-Key': 'e05Mw921/fGtzcIw08mVvw==1LhUMEen5QY4OMJs'})
+    if response.status_code == requests.codes.ok:
+        airports = response.json()
+    return airports

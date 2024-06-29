@@ -1,6 +1,6 @@
 import logging
 from django.shortcuts import render, redirect
-from .utils import get_countries, filter_countries, get_country_id, get_cities, get_airports
+from .utils import get_countries, filter_countries, get_country_id, get_cities, get_airports, get_city_depp
 import requests
 from django.conf import settings
 from datetime import datetime, timedelta
@@ -59,27 +59,26 @@ def flights(request, country_name, city_name):
         departure_date = request.POST.get('departureDate')
         return_date = request.POST.get('returnDate')
         departure_city = request.POST.get('departureCity')
-        arrival_iata = request.POST.get('arrivalIATA')
         request.session['departure_date'] = departure_date
         request.session['return_date'] = return_date
         request.session['departure_city'] = departure_city
-        request.session['arrival_iata'] = arrival_iata
     else:
         departure_date = request.session.get('departure_date')
         return_date = request.session.get('return_date')
         departure_city = request.session.get('departure_city')
-        arrival_iata = request.session.get('arrival_iata')
 
     api_key = settings.AVIATIONSTACK_API_KEY
 
     try:
+        airports_depp = get_city_depp(departure_city)
+        print(f'debug: {airports_depp}')
         # Fetch country information
         if country_name == 'United States':
             country_data = {
                 'country_name': 'United States',
                 'country_iso2': 'US'
             }
-            airports = get_airports(country_data['country_iso2'], city_name)
+            airports_arr = get_airports(country_data['country_iso2'], city_name)
         else:
             country_url = 'http://api.aviationstack.com/v1/countries'
             country_params = {
@@ -95,15 +94,16 @@ def flights(request, country_name, city_name):
                     'error_message': 'No country information found.'
                 })
             country_data = country_data_list[0]
+            print(f'debug: {country_data}')
 
-            airports = get_airports(country_data['country_iso2'], city_name)
+            airports_arr = get_airports(country_data['country_iso2'], city_name)
 
         # Fetch flight information
         flight_url = 'http://api.aviationstack.com/v1/flights'
         flight_params = {
             'access_key': api_key,
-            'dep_iata': departure_city,
-            'arr_iata': airports[0]['iata'],
+            'dep_iata': airports_depp[0]['iata'],
+            'arr_iata': airports_arr[0]['iata'],
             'flight_status': 'scheduled',
             'limit': 5,
         }
@@ -123,7 +123,7 @@ def flights(request, country_name, city_name):
         'departure_country': country_data,
         'departure_city': city_name,
         'flights': flights_data,
-        'arrival_iata': airports[0]['iata']
+        'arrival_iata': airports_arr[0]['iata']
     })
 
 

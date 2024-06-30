@@ -19,14 +19,12 @@ def questions(request):
     if request.method == 'POST':
         continent = request.POST.get('continent')
         weather = request.POST.getlist('weather')
-        population = request.POST.get('population')
         many_cities = request.POST.get('many_cities')
         departure_date = request.POST.get('departureDate')
         return_date = request.POST.get('returnDate')
         departure_city = request.POST.get('departureCity')
         request.session['continent'] = continent
         request.session['weather'] = weather
-        request.session['population'] = population
         request.session['many_cities'] = many_cities
         request.session['departure_date'] = departure_date
         request.session['return_date'] = return_date
@@ -41,7 +39,6 @@ def questions(request):
 def results(request):
     continent = request.session.get('continent')
     weather = request.session.get('weather')
-    population = request.session.get('population')
     many_cities = request.session.get('many_cities')
     url = 'https://restcountries.com/v3.1/region/'
     countries = get_countries(url, continent)
@@ -49,7 +46,7 @@ def results(request):
     filtered = filter_countries(countries, weather)
     names = [country['name']['common'] for country in filtered]
     countries_id = get_country_id(names)
-    filtered = get_cities(countries_id, population, many_cities)
+    filtered = get_cities(countries_id, many_cities)
 
     return render(request, 'results.html', {'continent': continent, 'data_continents': filtered})
 
@@ -122,6 +119,7 @@ def flights(request, country_name, city_name):
         'city_name': city_name,
         'departure_country': country_data,
         'departure_city': city_name,
+        'departure_date': departure_date,
         'flights': flights_data,
         'arrival_iata': airports_arr[0]['iata']
     })

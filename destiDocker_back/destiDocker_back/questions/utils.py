@@ -104,7 +104,7 @@ def get_country_id(countries):
     return dict_countries
 
 
-def get_cities(countries, min_population, many_cities):
+def get_cities(countries, many_cities):
     cities = {}
     for country, id in countries.items():
         where_dict = {
@@ -112,9 +112,6 @@ def get_cities(countries, min_population, many_cities):
                 "__type": "Pointer",
                 "className": "Continentscountriescities_Country",
                 "objectId": id
-            },
-            "population": {
-                "$gt": int(min_population)
             }
         }
         limit = 10 if many_cities else 3

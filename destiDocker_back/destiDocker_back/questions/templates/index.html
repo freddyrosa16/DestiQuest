@@ -4,10 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
 </head>
 <body>
-    <h1>Welcome to DestiQuest</h1>
-    <button onclick="location.href='{% url 'login' %}'">Login</button>
-    <button onclick="location.href='{% url 'register' %}'">Register</button>
+    <div>
+<img src="{% static 'images/Desti.logo.png' %}" alt="logo" id="Logo"> 
+<img src="{% static 'images/Desti.sun.png' %}" alt="sun" id="Sun">
+<img src="{% static 'images/cloud1.png' %}" alt="cloud" id="Cloud">
+<img src="{% static 'images/cloud1.png' %}" alt="cloud" id="Cloud2">
+<img src="{% static 'images/cloud1.png' %}" alt="cloud" id="Cloud3">
+        <h1>Welcome to DestiQuest</h1>
+        <div>
+            <button class="login-button" onclick="location.href='{% url 'login' %}'">Login</button>
+        </div>
+        <div>
+            <button class="register-button" onclick="location.href='{% url 'register' %}'">Register</button>
+        </div>
+<img src="{% static 'images/Desti.back.png' %}" alt="background" id="Back"> 
+<img src="{% static 'images/Desti.floor.png' %}" alt="floor" id="Floor">
+
+    </div>
 </body>
 </html>

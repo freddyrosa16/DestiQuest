@@ -59,7 +59,6 @@ TEMPLATES = [
     },
 ]
 
-
 WSGI_APPLICATION = "destiDocker_back.wsgi.application"
 
 # Database
@@ -113,8 +112,7 @@ AVIATIONSTACK_API_KEY = '3866066ab1dc76f06b0b35f3d1ba5bd5'
 LOGIN_REDIRECT_URL = 'questions'
 LOGOUT_REDIRECT_URL = 'login'
 
-
-# email
+# Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -122,3 +120,6 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'destiquest1@gmail.com'
 EMAIL_HOST_PASSWORD = 'Playmaker16@'
 DEFAULT_FROM_EMAIL = 'destiquest1@gmail.com'
+
+# Custom user model
+AUTH_USER_MODEL = 'destiDocker_back.CustomUser'

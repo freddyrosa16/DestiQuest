@@ -19,12 +19,13 @@ def send_welcome_email(sender, instance, created, **kwargs):
 """
 
 
-@receiver(user_logged_in)
-def send_login_email(sender, request, user, **kwargs):
-    subject = 'DestiQuest Login Notification'
-    message = (
-        f'Hi {user.username},\n\n'
-        f'You have successfully logged in to DestiQuest!'
-    )
-    recipient_list = [user.email]
-    send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, recipient_list)
+# @receiver(user_logged_in)
+# def send_login_email(sender, request, user, **kwargs):
+# Modify this line to use email instead of username
+# send_mail(
+# 'Login Notification',
+# f'Hello {user.email}, you have successfully logged in.',
+# settings.DEFAULT_FROM_EMAIL,
+# [user.email],
+# fail_silently=False,
+# )

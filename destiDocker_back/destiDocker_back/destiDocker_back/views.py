@@ -4,12 +4,11 @@ from questions.utils import get_countries, filter_countries, get_country_id, get
 from django.views import View
 import requests
 from django.conf import settings
-from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.signals import user_logged_in
-from .forms import CustomUserCreationForm
+from destiDocker_back.forms import CustomUserCreationForm
 
 
 class RegisterView(generic.CreateView):

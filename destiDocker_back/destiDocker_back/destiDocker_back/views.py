@@ -9,10 +9,11 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.signals import user_logged_in
+from .forms import CustomUserCreationForm
 
 
 class RegisterView(generic.CreateView):
-    form_class = UserCreationForm
+    form_class = CustomUserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'register.html'
 

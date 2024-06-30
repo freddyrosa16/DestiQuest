@@ -9,10 +9,10 @@ body {
   }
   .banner {
     height: 200px; /* Adjust height as needed */
-    width: 2600px; /* Adjust the width value as needed */
+    width:0 auto; /* Adjust the width value as needed */
     margin: 0 auto; /* Center horizontally */
-    background-image: url("banner1.jpg"); /* Replace with your image path */
-    background-size: cover; /* Stretch image to fill container */
+    background-image: url("banner2.jpg"); /* Replace with your image path */
+    background-size: 400px; /* Stretch image to fill container */
     background-position: center; /* Center the image */
   }
   
@@ -67,7 +67,7 @@ body {
   }
   
   .form-inline button {
-    background-color: #000000; /* Green */
+    background-color: #07065c; /* Green */
     color: white;
     padding: 10px 20px;
     border: none;
@@ -108,7 +108,7 @@ body {
   }
   
   .choose-button {
-    background-color: #333;
+    background-color: #0066ff;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -129,7 +129,7 @@ body {
     border-color: #0080ff; /* Green on focus */
   }
   .form-inline button {
-    background-color: #000000; /* Green */
+    background-color: #0062ff; /* Green */
     color: white;
     padding: 10px 20px;
     border: none;

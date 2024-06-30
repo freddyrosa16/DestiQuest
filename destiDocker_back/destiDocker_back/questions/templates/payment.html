@@ -1,19 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/payment.css' %}">
+
     <title>Payment</title>
 </head>
 <body>
-    <h1>Payment for Flight {{ booking.flight_number }}</h1>
-    <p>Departure: {{ booking.departure_time }}</p>
-    <p>Arrival: {{ booking.arrival_time }}</p>
-    <p>Departure Airport: {{ booking.departure_airport }}</p>
-    <p>Arrival Airport: {{ booking.arrival_airport }}</p>
-    <p>Price: ${{ booking.price }}</p>
+    <div class="container">
+        <h1>Payment for Flight ABC123</h1>
+        <p>Departure: 12:00 PM</p>
+        <p>Arrival: 3:00 PM</p>
+        <p>Departure Airport: Airport A</p>
+        <p>Arrival Airport: Airport B</p>
+        <p>Price: $200</p>
 
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit">Pay Now</button>
-    </form>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">Pay Now</button>
+        </form>
+    </div>
 </body>
 </html>
+

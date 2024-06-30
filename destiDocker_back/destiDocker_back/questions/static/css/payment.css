@@ -1,0 +1,52 @@
+/* Basic styles */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ff0000; /* Light gray background */
+  }
+  
+  .container {
+    width: 500px;
+    margin: 50px auto; /* Center the container horizontally */
+    padding: 30px;
+    border-radius: 5px;
+    background-color: #fff; /* White background for the form */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
+  }
+  
+  h1 {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+  
+  p {
+    margin-bottom: 10px;
+  }
+  
+  /* Flight information styling */
+  p span { /* Add styling to the values following labels (Departure, Arrival, etc.) */
+    font-weight: bold;
+  }
+  
+  /* Payment form styling */
+  form {
+    text-align: center;
+    margin-top: 30px;
+  }
+  
+  button[type="submit"] {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db; /* Blue button color */
+    color: #fff; /* White button text */
+    font-weight: bold;
+    cursor: pointer; /* Indicate clickable button */
+  }
+  
+  button[type="submit"]:hover { /* Button hover effect */
+    background-color: #2980b9; /* Darker blue on hover */
+  }
+  

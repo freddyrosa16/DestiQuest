@@ -7,8 +7,8 @@
 </head>
 
     <header class="header">
-        <div class="banner">
-            <img rel="stylesheet" src="{% static 'images/banner2.jpg' %}">
+        <div>
+            <img class="banner" rel="stylesheet" src="{% static 'images/banner2.jpg' %}">
         </div>
         </header>
 
@@ -75,7 +75,7 @@
         {% endfor %}
         </div>
     {% else %}
-        <p>No flights found.</p>
+        <p class="no-flights">No flights found.</p>
     {% endif %}
 </body>
 </html>

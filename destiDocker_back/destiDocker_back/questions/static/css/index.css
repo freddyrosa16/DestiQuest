@@ -1,3 +1,12 @@
+html {
+    overflow: hidden;
+}
+img {
+    -webkit-user-select: none; /* Chrome, Safari, Opera */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera, and Firefox */
+    }
 .container {
     position: relative; /* Makes it the positioning context */
 }
@@ -24,12 +33,13 @@ body {
             background-color: #a1e9ff;
         }
         h1 {
+            font-family: 'Press Start 2P', cursive;
+            color: #a1e9ff;
             position: absolute;
             top: 45%; /* Adjust as necessary */
-            left: 50%;
+            left: 51%;
             transform: translate(-50%, -50%); /* Centers the h1 */
             text-align: center;
-            color: #fffefe;
             z-index: 2; /* Ensures that the h1 is above #Back */
         }
        /* Container for buttons */
@@ -41,6 +51,7 @@ body {
 
 /* Styling for the login button container */
 .login-button {
+    font-family: 'Press Start 2P', cursive;
     position: absolute;
     top: 60%; /* Adjust as necessary */
     left: 50%; /* Adjust as necessary */
@@ -49,18 +60,33 @@ body {
 }
 /* Styling for the register button container */
 .register-button {
+    font-family: 'Press Start 2P', cursive;
     position: absolute;
     top: 65%; /* Adjust as necessary */
     left: 50%; /* Adjust as necessary */
     transform: translate(-50%, -50%);
     z-index: 3; /* Ensures it's above all other elements */
 }
-        button:hover {
-            background-color: rgb(58, 155, 187);
-        }
-        button:active {
-            background-color: lightgreen;
-        }
+button {
+    background-color: #a1e9ff; /* Color de fondo */
+    border: none;
+    color: dark blue;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 6px 2px;
+    cursor: pointer;
+    font-family: 'Press Start 2P', cursive; /* Fuente estilo pixel */
+    border: 3px solid #FFFFFF; /* Borde blanco para efecto pixel */
+    box-shadow: 0 0 0 2px #00A0E4; /* Sombra para profundizar el efecto pixel */
+    transition: background-color 0.3s, box-shadow 0.3s; /* Transición suave */
+}
+button:hover {
+    background-color: #0083B0; /* Color más oscuro al pasar el mouse */
+    box-shadow: 0 0 0 2px #0083B0; /* Sombra que coincide con el nuevo color de fondo */
+}
         #Floor {
             position: absolute;
             bottom: 7px; /* Lower the image by 10 pixels */
@@ -75,44 +101,26 @@ body {
             width: 1000px;
             height: auto;
         }
-        
-        @keyframes moveCloud1 {
-            from { left: 10%; }
-            to { left: calc(100% + 1200px); }
-        }
-        
-        @keyframes moveCloud2 {
-            from { left: 50%; }
-            to { left: calc(100% + 1200px); }
-        }
-        
-        @keyframes moveCloud3 {
-            from { left: 30%; }
-            to { left: calc(100% + 1200px); }
-        }
         #Cloud {
             position: absolute;
-            top: 10px;
-            left: 10%;
+            top: -200px;
+            left: -15%;
             width: 1200px;
             height: auto;
-            animation: moveCloud1 20s linear infinite;
         }
         
         #Cloud2 {
             position: absolute;
-            top: 10px;
-            left: 50%;
+            top: 30px;
+            left: 60%;
             width: 1200px;
             height: auto;
-            animation: moveCloud2 25s linear infinite;
         }
         
         #Cloud3 {
             position: absolute;
             top: 10px;
-            left: 30%;
+            left: -40%;
             width: 1200px;
             height: auto;
-            animation: moveCloud3 30s linear infinite;
         }

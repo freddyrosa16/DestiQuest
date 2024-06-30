@@ -2,14 +2,23 @@
 <html>
 <head>
     <title>Register</title>
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
 </head>
 <body>
-    <h2>Register</h2>
-    <form method="post">
+    <img src="{% static 'images/Desti.sun.png' %}" alt="sun" id="Sun">
+    <img src="{% static 'images/Desti.back.png' %}" alt="background" id="Back"> 
+    <img src="{% static 'images/cloud1.png' %}" alt="cloud" id="Cloud">
+    <img src="{% static 'images/cloud1.png' %}" alt="cloud" id="Cloud2">
+    <img src="{% static 'images/cloud1.png' %}" alt="cloud" id="Cloud3">
+    <form class="form-container" method="post">
+        <h2>Register</h2>
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Register</button>
+        <a href="{% url 'login' %}">Login here</a>
     </form>
-    <a href="{% url 'login' %}">Login here</a>
+    <img src="{% static 'images/Desti.floor.png' %}" alt="floor" id="Floor">
 </body>
 </html>

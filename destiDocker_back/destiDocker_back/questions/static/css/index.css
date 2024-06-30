@@ -1,0 +1,118 @@
+.container {
+    position: relative; /* Makes it the positioning context */
+}
+#Back {
+    display: block;
+    width: 80%;
+    height: auto; /* Adjust as needed */
+    margin: 0 auto;
+    z-index: 0; /* Ensures it's behind #Logo */
+}
+#Logo {
+    display: block;
+    width: 70%; /* Adjust to a reasonable percentage or pixel value */
+    height: auto; /* This will automatically adjust the height to maintain the aspect ratio */
+    margin: 0 auto; /* Center horizontally, adjust if needed */
+    position: absolute; /* Allows positioning over #Back */
+    z-index: 1; /* Ensures it appears on top of #Back */
+    top: 30%; /* Example to move down, adjust as needed */
+    left: 50%; /* Center horizontally, adjust as needed */
+    transform: translate(-50%, -50%); /* Adjusts for the dimensions of #Logo to center it */
+    object-fit: contain; /* Maintains aspect ratio without cropping */
+}
+body {
+            background-color: #a1e9ff;
+        }
+        h1 {
+            position: absolute;
+            top: 45%; /* Adjust as necessary */
+            left: 50%;
+            transform: translate(-50%, -50%); /* Centers the h1 */
+            text-align: center;
+            color: #fffefe;
+            z-index: 2; /* Ensures that the h1 is above #Back */
+        }
+       /* Container for buttons */
+.container {
+    position: relative;
+    width: 100%; /* Adjust based on your layout */
+    height: 100px; /* Adjust based on your layout */
+}
+
+/* Styling for the login button container */
+.login-button {
+    position: absolute;
+    top: 60%; /* Adjust as necessary */
+    left: 50%; /* Adjust as necessary */
+    transform: translate(-50%, -50%);
+    z-index: 3; /* Ensures it's above all other elements */
+}
+/* Styling for the register button container */
+.register-button {
+    position: absolute;
+    top: 65%; /* Adjust as necessary */
+    left: 50%; /* Adjust as necessary */
+    transform: translate(-50%, -50%);
+    z-index: 3; /* Ensures it's above all other elements */
+}
+        button:hover {
+            background-color: rgb(58, 155, 187);
+        }
+        button:active {
+            background-color: lightgreen;
+        }
+        #Floor {
+            position: absolute;
+            bottom: 7px; /* Lower the image by 10 pixels */
+            left: 0;
+            width: 100%;
+            height: auto;
+        }
+        #Sun {
+            position: absolute;
+            top: -25px; /* Corrected from -2S5px to -25px */
+            left: 65%;
+            width: 1000px;
+            height: auto;
+        }
+        
+        @keyframes moveCloud1 {
+            from { left: 10%; }
+            to { left: calc(100% + 1200px); }
+        }
+        
+        @keyframes moveCloud2 {
+            from { left: 50%; }
+            to { left: calc(100% + 1200px); }
+        }
+        
+        @keyframes moveCloud3 {
+            from { left: 30%; }
+            to { left: calc(100% + 1200px); }
+        }
+        #Cloud {
+            position: absolute;
+            top: 10px;
+            left: 10%;
+            width: 1200px;
+            height: auto;
+            animation: moveCloud1 20s linear infinite;
+        }
+        
+        #Cloud2 {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            width: 1200px;
+            height: auto;
+            animation: moveCloud2 25s linear infinite;
+        }
+        
+        #Cloud3 {
+            position: absolute;
+            top: 10px;
+            left: 30%;
+            width: 1200px;
+            height: auto;
+            animation: moveCloud3 30s linear infinite;
+        }

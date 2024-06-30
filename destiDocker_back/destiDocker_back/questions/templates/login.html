@@ -2,14 +2,30 @@
 <html>
 <head>
     <title>Login</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
 </head>
 <body>
+    <!-- Background and decorative images -->
+    <img src="{% static 'images/Desti.back.png' %}" alt="background" id="Back"> 
+    <img src="{% static 'images/Desti.floor.png' %}" alt="floor" id="Floor">
+    <img src="{% static 'images/Desti.logo.png' %}" alt="logo" id="Logo"> 
+    <img src="{% static 'images/Desti.sun.png' %}" alt="sun" id="Sun">
+    <img src="{% static 'images/cloud1.png' %}" alt="cloud" id="Cloud">
+    <img src="{% static 'images/cloud1.png' %}" alt="cloud" id="Cloud2">
+    <img src="{% static 'images/cloud1.png' %}" alt="cloud" id="Cloud3">
+
+    <!-- Login form -->
+    <div class="form-container">
     <h2>Login</h2>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        <div class="login-option">
+            {{ form.as_p }}
+        </div>
         <button type="submit">Login</button>
     </form>
     <a href="{% url 'register' %}">Register here</a>
+</div>
 </body>
 </html>

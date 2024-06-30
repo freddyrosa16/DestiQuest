@@ -1,0 +1,93 @@
+body {
+    background-color: #a1e9ff; /* Light blue background */
+    position: relative; /* Needed for absolute positioning of children */
+    min-height: 100vh; /* Ensure full viewport height */
+    margin: 0; /* Remove default margin */
+}
+
+/* Background image */
+#Back {
+    position: absolute;
+    width: 100%; /* Full width */
+    height: auto; /* Maintain aspect ratio */
+    bottom: 0; /* Align to bottom */
+    z-index: -1; /* Ensure it's behind content */
+}
+
+/* Floor image */
+#Floor {
+    position: absolute;
+    bottom: 0; /* Align to bottom */
+    left: 0;
+    width: 100%; /* Full width */
+    height: auto; /* Maintain aspect ratio */
+    z-index: -1; /* Above background, behind content */
+}
+#Logo {
+    position: absolute;
+    top: 20%; /* Adjust based on design */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Center align */
+    width: auto; /* Adjust based on design */
+    height: auto; /* Maintain aspect ratio */
+    z-index: -1; /* Above all background and decorative images */
+}
+
+/* Sun */
+#Sun {
+    position: absolute;
+    top: -15%; /* Adjust based on design */
+    left: 65%; /* Position towards the right */
+    width: 50%; /* Adjust size */
+    height: auto; /* Maintain aspect ratio */
+    z-index: 1; /* Above background */
+}
+
+/* Clouds */
+#Cloud, #Cloud2, #Cloud3 {
+    position: absolute;
+    width: 50%; /* Adjust size */
+    height: auto; /* Maintain aspect ratio */
+    z-index: -1; /* Above background */
+}
+
+#Cloud {
+    top: 10%;
+    left: 10%;
+}
+
+#Cloud2 {
+    top: 15%;
+    left: 50%;
+}
+
+#Cloud3 {
+    top: 20%;
+    left: 30%;
+}
+
+/* Autocomplete styles */
+.autocomplete-suggestions {
+    border: 1px solid #e0e0e000;
+    max-height: 150px;
+    overflow-y: auto;
+    background-color: #f9f9f900; /* Light background to match the theme */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    border-radius: 4px; /* Rounded corners */
+    z-index: 1;
+}
+
+.autocomplete-suggestion {
+    padding: 8px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #e0e0e0; /* Separators for suggestions */
+}
+
+.autocomplete-suggestion:last-child {
+    border-bottom: none; /* Remove bottom border for the last suggestion */
+}
+
+.autocomplete-suggestion:hover {
+    background-color: #e6f7ff; /* Light blue on hover to match theme */
+}

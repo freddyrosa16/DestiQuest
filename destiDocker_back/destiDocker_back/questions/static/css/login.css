@@ -1,0 +1,119 @@
+body {
+    background-color: #a1e9ff; /* Light blue background */
+    position: relative; /* Needed for absolute positioning of children */
+    min-height: 100vh; /* Ensure full viewport height */
+    margin: 0; /* Remove default margin */
+}
+
+/* Background image */
+#Back {
+    position: absolute;
+    width: 100%; /* Full width */
+    height: auto; /* Maintain aspect ratio */
+    bottom: 0; /* Align to bottom */
+    z-index: -1; /* Ensure it's behind content */
+}
+
+/* Floor image */
+#Floor {
+    position: absolute;
+    bottom: 0; /* Align to bottom */
+    left: 0;
+    width: 100%; /* Full width */
+    height: auto; /* Maintain aspect ratio */
+    z-index: 0; /* Above background, behind content */
+}
+
+/* Logo */
+#Logo {
+    position: absolute;
+    top: -20%; /* Adjust based on design */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Center align */
+    width: 65%; /* Logo width */
+    height: auto; /* Maintain aspect ratio */
+    z-index: 1; /* Above background */
+}
+
+/* Sun */
+#Sun {
+    position: absolute;
+    top: -15%; /* Adjust based on design */
+    left: 65%; /* Position towards the right */
+    width: 50%; /* Adjust size */
+    height: auto; /* Maintain aspect ratio */
+    z-index: 1; /* Above background */
+}
+
+/* Clouds */
+#Cloud, #Cloud2, #Cloud3 {
+    position: absolute;
+    width: 50%; /* Adjust size */
+    height: auto; /* Maintain aspect ratio */
+    z-index: 1; /* Above background */
+}
+
+#Cloud {
+    top: 10%;
+    left: 10%;
+}
+
+#Cloud2 {
+    top: 15%;
+    left: 50%;
+}
+
+#Cloud3 {
+    top: 20%;
+    left: 30%;
+}
+
+/* Form container */
+.form-container {
+    position: relative; /* Centering context */
+    width: 80%; /* Adjust based on design */
+    max-width: 400px; /* Max width */
+    margin: 5% auto; /* Center vertically and horizontally */
+    padding: 20px; /* Padding around form */
+    background: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    z-index: 2; /* Above all other elements */
+    top: 290px; /* Adjust this value to lower or raise the form as a whole */
+}
+
+/* Button styles */
+button {
+    display: block; /* Full width */
+    width: 100%; /* Full width */
+    padding: 10px; /* Padding for better touch */
+    margin-top: 10px; /* Space between form elements */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #007bff; /* Bootstrap blue */
+    color: white; /* Text color */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+button:active {
+    background-color: #004085; /* Even darker blue on active/focus */
+}
+
+/* Link styles */
+a {
+    display: inline-block; /* Allows margin */
+    margin-top: 10px; /* Space from button */
+    color: #007bff; /* Bootstrap blue */
+    text-decoration: none; /* No underline */
+}
+
+a:hover, a:focus {
+    text-decoration: underline; /* Underline on hover/focus */
+}
+.form-container .login-option {
+    padding-top: 25px; /* Adjust this value to lower the login options */
+}

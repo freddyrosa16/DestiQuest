@@ -9,7 +9,7 @@ body {
   }
   .banner {
     height: 200px; /* Adjust height as needed */
-    width: 1600px; /* Adjust the width value as needed */
+    width: 2600px; /* Adjust the width value as needed */
     margin: 0 auto; /* Center horizontally */
     background-image: url("banner1.jpg"); /* Replace with your image path */
     background-size: cover; /* Stretch image to fill container */

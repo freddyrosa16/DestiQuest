@@ -1,0 +1,116 @@
+body {
+    font-family: 'Press Start 2P', cursive;
+    margin: 2rem;
+    background-image: url("back.jpg"); /* Replace with your image path */
+    background-repeat: no-repeat; /* Ensure image doesn't repeat */
+    background-position: center;  /* Center the image horizontally */
+    background-size: cover;       /* Resize image to cover the entire body */
+  }
+  
+  
+  @keyframes background-pulse {
+    from {
+      background-color: #fefffe;
+    }
+    to {
+      background-color: #f5f9fd;
+    }
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+    animation: entrance-down 0.5s ease-in-out forwards;
+  }
+  
+  @keyframes entrance-down {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  form {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    animation: grow 0.5s ease-in-out forwards;
+  }
+  
+  @keyframes grow {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #7d5454;
+    border-radius: 3px;
+  }
+  
+  textarea {
+    height: 100px;
+  }
+  
+  button[type="submit"] {
+    background-color: #0091ff;
+    color: rgb(255, 255, 255);
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    animation: button-pop 0.5s ease-in-out forwards;
+  }
+  
+  @keyframes button-pop {
+    from {
+      transform: scale(0.9);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #00eaff;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #0091ff; /* Base button color */
+    box-shadow: 0 0 10px rgba(0, 145, 255, 0.5); /* Glow effect */
+  }
+  
+  button[type="submit"]:active {
+    transform: translateY(3px); /* Move the button down slightly */
+    animation: button-bounce 0.3s ease-in-out;
+  }
+  
+  @keyframes button-bounce {
+    0% {
+      transform: translateY(3px);
+    }
+    50% {
+      transform: translateY(-1px);
+    }
+    100% {
+      transform: translateY(3px);
+    }
+  }
+  

@@ -3,50 +3,68 @@
 <head>
     <title>Results</title>
         {% load static %}
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'css/results.css' %}">
 </head>
 <body>
-    <img src="{% static 'images/Desti.back.png' %}" alt="background" id="Back">
-    <img src="{% static 'images/Desti.floor.png' %}" alt="floor" id="Floor">
-    <img src="{% static 'images/Desti.sun.png' %}" alt="sun" id="Sun">
-    <img src="{% static 'images/Desti.logo.png' %}" alt="logo" id="Logo">
-    <img src="{% static 'images/cloud1.png' %}" alt="cloud" id="Cloud">
-    <img src="{% static 'images/cloud1.png' %}" alt="cloud" id="Cloud2">
-    <img src="{% static 'images/cloud1.png' %}" alt="cloud" id="Cloud3">
     <h1>The Results</h1>
 
+<div id="countries-container">
     {% for country, cities in data_continents.items %}
-    <h2 class="country-title" style="cursor: pointer;">{{ country }}</h2>
-    <div class="city-info" style="display: none;">
-        {% if cities %}
-            {% for city in cities %}
-                <h3>
-                    <a href="{% url 'flights' country city.name %}"
-                       onclick="event.preventDefault(); document.getElementById('flights-form-{{ forloop.parentloop.counter }}-{{ forloop.counter }}').submit();">
-                        City: {{ city.name }}
-                    </a>
-                </h3>
-                <p>Population: {{ city.population }}</p>
-                <form id="flights-form-{{ forloop.parentloop.counter }}-{{ forloop.counter }}" method="post" action="{% url 'flights' country city.name %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="departureDate" value="{{ request.session.departure_date }}">
-                    <input type="hidden" name="departureCity" value="{{ request.session.departure_city }}">
-                    <input type="hidden" name="arrivalIATA" value="{{ city.iata_code }}">
-                </form>
-            {% endfor %}
-        {% else %}
-            <p>No cities found</p>
-        {% endif %}
+    <div class="country-container">
+        <h2 class="country-title" onclick="showCities('{{ country }}')" style="cursor: pointer;">{{ country }}</h2>
     </div>
-{% endfor %}
+    {% endfor %}
+</div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script>
-    $(document).ready(function() {
-        $('.country-title').click(function() {
-            $(this).next('.city-info').slideToggle();
-        });
-    });
-    </script>
+<!-- Contenedores de ciudades, inicialmente ocultos -->
+{% for country, cities in data_continents.items %}
+<div id="cities-{{ country }}" class="city-container" style="display: none; flex: 1 0 20%; margin: 10px; box-sizing: border-box;">
+    {% for city in cities %}
+    <a href="{% url 'flights' country city.name %}"
+        onclick="event.preventDefault(); document.getElementById('flights-form-{{ forloop.parentloop.counter }}-{{ forloop.counter }}').submit();">
+        {{ city.name }}
+    </a>
+    <form id="flights-form-{{ forloop.parentloop.counter }}-{{ forloop.counter }}" style="display: none;" action="{% url 'flights' country city.name %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="departureDate" value="{{ request.session.departure_date }}">
+        <input type="hidden" name="departureCity" value="{{ request.session.departure_city }}">
+        <input type="hidden" name="arrivalIATA" value="{{ city.iata_code }}">
+    </form>
+    {% endfor %}
+</div>
+{% endfor %}
+<button onclick="chooseAnotherCountry()" style="display: none;" id="goBackButton">Go back</button>
+<img src="{% static 'images/Desti.floor.png' %}" alt="floor" id="Floor">
+
+<script>
+    function showCities(country) {
+        var cityContainer = document.getElementById('cities-' + country);
+        var countriesContainer = document.getElementById('countries-container');
+        var goBackButton = document.getElementById('goBackButton'); // Obtiene el botón Go Back
+    
+        if (cityContainer.style.display === 'none' || cityContainer.style.display === '') {
+            cityContainer.style.display = 'flex'; // Muestra el contenedor de ciudades
+            countriesContainer.style.display = 'none'; // Oculta el contenedor de países
+            goBackButton.style.display = 'block'; // Muestra el botón Go Back
+        } else {
+            cityContainer.style.display = 'none'; // Oculta el contenedor de ciudades
+            countriesContainer.style.display = 'flex'; // Muestra el contenedor de países
+            goBackButton.style.display = 'none'; // Oculta el botón Go Back
+        }
+    }
+    
+    function chooseAnotherCountry() {
+        console.log("Choosing another country..."); // Verificar que la función se llama
+        var cityContainers = document.getElementsByClassName('city-container');
+        for (var i = 0; i < cityContainers.length; i++) {
+            cityContainers[i].style.display = 'none';
+        }
+        // Ocultar el botón Go back
+        document.getElementById('goBackButton').style.display = 'none';
+        // Mostrar el contenedor de países
+        document.getElementById('countries-container').style.display = 'flex';
+    }
+</script>
 </body>
 </html>

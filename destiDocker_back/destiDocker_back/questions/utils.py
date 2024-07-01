@@ -114,9 +114,8 @@ def get_cities(countries, many_cities):
                 "objectId": id
             }
         }
-        limit = 10 if many_cities else 3
         where = urllib.parse.quote_plus(json.dumps(where_dict))
-        url = f'https://parseapi.back4app.com/classes/Continentscountriescities_City?where={where}&order=-population&limit={limit}'
+        url = f'https://parseapi.back4app.com/classes/Continentscountriescities_City?where={where}&order=-population&limit={many_cities}'
         headers = {
             'X-Parse-Application-Id': 'J0N5Xu7Z4hPhdlnXEa9iK5vIXOfSxDTsEwK7nHia',
             'X-Parse-REST-API-Key': 'nb139EQwb7s0iRfZrFye2WqLACTQL9C7cfKKMV87'

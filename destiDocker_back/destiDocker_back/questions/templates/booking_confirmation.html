@@ -2,6 +2,9 @@
 <html>
 <head>
     <title>Booking Confirmation</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/booking_confirmation.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
     <h1>Booking Confirmation</h1>
@@ -11,5 +14,13 @@
     <p>Departure Airport: {{ booking.departure_airport }}</p>
     <p>Arrival Airport: {{ booking.arrival_airport }}</p>
     <p>Price: ${{ booking.price }}</p>
+
 </body>
+<footer>
+    <div class="footer-banner">
+      <p>Thank you for trusting Desti Quest.</p>
+      <a href="#">Click here for more information</a>
+    </div>
+  </footer>
+  
 </html>

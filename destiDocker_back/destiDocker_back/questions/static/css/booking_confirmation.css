@@ -1,0 +1,82 @@
+body {
+    font-family:'Press Start 2P', cursive;
+    margin: 2rem;
+    background-color: #ffffff;
+    animation: background-pulse 3s infinite alternate ease-in-out;
+  }
+  
+  @keyframes background-pulse {
+    from {
+      background-color: #6ab5ff;
+    }
+    to {
+      background-color: #0056ab;
+    }
+  }
+  
+  CSS
+  h1 {
+    font-size: 2em;
+    color: #ffffff;
+  }
+  
+  p {
+    margin-bottom: 0.5rem;
+    font-size: 16px; /* Clear and readable text size */
+    color: #fff;
+    line-height: 1.5; /* Improve line spacing for readability */
+  }
+  
+  .booking-details {
+    background-color: #fff; /* White background for details */
+    border-radius: 10px; /* Rounded corners */
+    padding: 2rem; /* Add some padding inside */
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1); /* Subtle shadow */
+    max-width: 500px; /* Limit width for responsiveness */
+    text-align: left; /* Left-align content for clarity */
+  }
+  button[type="submit"] {
+    background-color: #0091ff;
+    color: rgb(255, 255, 255);
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    animation: button-pop 0.5s ease-in-out forwards;
+  }
+  
+  @keyframes button-pop {
+    from {
+      transform: scale(0.9);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #5085de;
+  }
+  
+  footer {
+    background-color: #0f1c5f; /* Light gray background */
+    padding: 1rem 2rem; /* Add some padding */
+    text-align: center; /* Center the content */
+  }
+  
+  .footer-banner {
+    margin: 1rem auto; /* Add some margin and center horizontally */
+    max-width: 500px; /* Limit width for responsiveness */
+    padding: 1rem; /* Add padding inside the banner */
+    background-color: #ffffff /* Rounded corners */
+  }
+  
+  .footer-banner p {
+    margin-bottom: 0.5rem; /* Add space below the paragraph */
+  }
+  
+  .footer-banner a {
+    color: #0091ff; /* Blue color for the link */
+    text-decoration: none; /* Remove underline from link */
+    font-weight: bold; /* Bold text for the link */
+  }

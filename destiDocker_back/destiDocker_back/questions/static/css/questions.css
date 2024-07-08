@@ -32,31 +32,51 @@ height: auto; /* Maintain aspect ratio */
 z-index: -1; /* Above background, behind content */
 }
 
-/* Sun */
-#Sun {
-position: absolute;
-top: -15%; /* Adjust based on design */
-left: 65%; /* Position towards the right */
-width: 50%; /* Adjust size */
-height: auto; /* Maintain aspect ratio */
-z-index: 1; /* Above background */
+@keyframes rotateSun {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-/* Clouds */
+#Sun {
+  position: absolute;
+  top: -160px;
+  left: 65%;
+  width: 1000px;
+  height: auto;
+  animation: floatSun 5s ease-in-out infinite, rotateSun 30s linear infinite; /* Adjust time as needed */
+}
+        @keyframes moveClouds {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
 #Cloud, #Cloud2, #Cloud3 {
-position: absolute;
-width: 50%; /* Adjust size */
-z-index: -1; /* Above background */
+  position: absolute;
+  width: 50%; /* Adjust size */
+  z-index: 0; /* Above background */
+  animation: moveClouds 20s linear infinite; /* Adjust time as needed */
 }
 
 #Cloud {
-top: 2%;
-left: -7%;
+  top: 2%;
+  left: -7%;
 }
 
 #Cloud2 {
-top: 15%;
-left: 60%;
+  top: 15%;
+  left: 60%;
+}
+#Cloud3 {
+  top: 30%;
+  left: 30%;
 }
 
 /* Autocomplete styles */
@@ -90,7 +110,7 @@ display: block; /* Use block layout instead of inline */
 margin: 0 auto; /* Center the image horizontally */
 border: 2px solid #ffffff00; /* Optional: adds a black border around the image */
 position: absolute; /* Positioning relative to its nearest positioned ancestor */
-top: 280px; /* Adjust the top position as needed */
+top: 365px; /* Adjust the top position as needed */
 left: 750px; /* Adjust the left position as needed */
 }
 #Form {

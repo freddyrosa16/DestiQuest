@@ -5,18 +5,8 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #b2dcf2;
+  background-color: #86d0f8;
 }
-.banner {
-  height: 200px; /* Adjust height as needed */
-  width: 100%; /* Adjust the width value as needed */
-  margin: 0; /* Center horizontally */
-  background-image: url("banner2.jpg"); /* Replace with your image path */
-  background-size: 400px; /* Stretch image to fill container */
-  background-position: center; /* Center the image */
-}
-
-
 h1, h2 {
   text-align: center;
   margin: 10px 0;
@@ -173,4 +163,13 @@ h2 {
   text-align: center;
   font-weight: bold;
   color: #333;
+}
+.plane-image {
+  position: relative;
+  top: 250px; /* Corrected to ensure it starts from the top */
+  left: 0;
+  width: 30%; /* Adjusted to cover the viewport width */
+  height: 100%; /* Adjusted to cover the viewport height */
+  object-fit: cover; /* Cover the entire page without losing aspect ratio */
+  z-index: -1; /* Behind the content */
 }

@@ -94,33 +94,49 @@ button:hover {
             width: 100%;
             height: auto;
         }
-        #Sun {
+        @keyframes rotateSun {
+            from {
+              transform: rotate(0deg);
+            }
+            to {
+              transform: rotate(360deg);
+            }
+          }
+          
+          #Sun {
             position: absolute;
-            top: -25px; /* Corrected from -2S5px to -25px */
+            top: -160px;
             left: 65%;
             width: 1000px;
             height: auto;
-        }
-        #Cloud {
+            animation: floatSun 5s ease-in-out infinite, rotateSun 30s linear infinite; /* Adjust time as needed */
+          }
+                  @keyframes moveClouds {
+            from {
+              transform: translateX(-100%);
+            }
+            to {
+              transform: translateX(100%);
+            }
+          }
+          
+          #Cloud, #Cloud2, #Cloud3 {
             position: absolute;
-            top: -200px;
-            left: -15%;
-            width: 1200px;
-            height: auto;
-        }
-        
-        #Cloud2 {
-            position: absolute;
-            top: 30px;
+            width: 50%; /* Adjust size */
+            z-index: 0; /* Above background */
+            animation: moveClouds 30s linear infinite; /* Adjust time as needed */
+          }
+          
+          #Cloud {
+            top: 2%;
+            left: -7%;
+          }
+          
+          #Cloud2 {
+            top: 15%;
             left: 60%;
-            width: 1200px;
-            height: auto;
-        }
-        
-        #Cloud3 {
-            position: absolute;
-            top: 10px;
-            left: -40%;
-            width: 1200px;
-            height: auto;
-        }
+          }
+          #Cloud3 {
+            top: 30%;
+            left: 30%;
+          }

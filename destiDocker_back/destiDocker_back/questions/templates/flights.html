@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div class="flight-price">
-                    $200.00
+                    ${{ flight.price }}.00
                 </div>
                 <form method="post" action="{% url 'book_flight' %}">
                     {% csrf_token %}
@@ -68,7 +68,7 @@
                     <input type="hidden" name="arrival_time" value="{{ flight.arrival.scheduled }}">
                     <input type="hidden" name="departure_airport" value="{{ flight.departure.airport }}">
                     <input type="hidden" name="arrival_airport" value="{{ flight.arrival.airport }}">
-                    <input type="hidden" name="price" value="200.00">
+                    <input type="hidden" name="price" value= {{ flight.price }}>
                     <button type="submit" class="choose-button">Choose This Flight</button>
                 </form>
             </div>

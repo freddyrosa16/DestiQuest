@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .models import Booking
+import random
 
 logger = logging.getLogger(__name__)
 
@@ -68,7 +69,6 @@ def flights(request, country_name, city_name):
 
     try:
         airports_depp = get_city_depp(departure_city)
-        print(f'debug: {airports_depp}')
         # Fetch country information
         if country_name == 'United States':
             country_data = {
@@ -91,7 +91,6 @@ def flights(request, country_name, city_name):
                     'error_message': 'No country information found.'
                 })
             country_data = country_data_list[0]
-            print(f'debug: {country_data}')
 
             airports_arr = get_airports(country_data['country_iso2'], city_name)
 
@@ -108,12 +107,16 @@ def flights(request, country_name, city_name):
         flight_response.raise_for_status()
         flights_data = flight_response.json().get('data', [])
 
+        for flight in flights_data:
+            flight['price'] = random.randint(200, 501)
+
     except requests.RequestException as e:
         logger.error(f"Error fetching data from API: {e}")
         return render(request, 'flights.html', {
             'error_message': 'There was an error retrieving flight data. Please try again later.'
         })
 
+    request.session['flights_data'] = flights_data
     return render(request, 'flights.html', {
         'country_name': country_data['country_name'],
         'city_name': city_name,
@@ -165,6 +168,15 @@ def book_flight(request):
         arrival_airport = request.POST.get('arrival_airport')
         price = request.POST.get('price')
 
+        request.session['selected_flight'] = {
+            'flight_number': flight_number,
+            'departure_time': departure_time,
+            'arrival_time': arrival_time,
+            'departure_airport': departure_airport,
+            'arrival_airport': arrival_airport,
+            'price': price
+        }
+
         booking = Booking.objects.create(
             user=request.user,
             flight_number=flight_number,
@@ -183,13 +195,14 @@ def book_flight(request):
 @login_required
 def payment(request, booking_id):
     booking = Booking.objects.get(id=booking_id)
+    select_flight = request.session.get('selected_flight')
     if request.method == 'POST':
         # Simulate payment processing
         booking.paid = True
         booking.save()
         return redirect('booking_confirmation', booking_id=booking.id)
 
-    return render(request, 'payment.html', {'booking': booking})
+    return render(request, 'payment.html', {'booking': booking, 'flight': select_flight})
 
 
 @login_required

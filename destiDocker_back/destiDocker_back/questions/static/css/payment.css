@@ -3,19 +3,19 @@ body {
     font-family: sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #ff0000; /* Light gray background */
+    background-color: #9dd5e6; /* Light gray background */
   }
   
   .container {
+    position: relative; /* Added to allow for top adjustments */
+    top: 120px; /* Default to 0, adjust as needed */
     width: 500px;
     margin: 50px auto; /* Center the container horizontally */
     padding: 30px;
     border-radius: 5px;
     background-color: #fff; /* White background for the form */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
-  }
-  
-  h1 {
+}  h1 {
     text-align: center;
     font-size: 22px;
     margin-bottom: 20px;
@@ -50,3 +50,67 @@ body {
     background-color: #2980b9; /* Darker blue on hover */
   }
   
+/* Background image */
+#Back {
+  position: absolute;
+  width: 100%; /* Full width */
+  height: auto; /* Maintain aspect ratio */
+  bottom: 0; /* Align to bottom */
+  z-index: -1; /* Ensure it's behind content */
+}
+
+/* Floor image */
+#Floor {
+  position: absolute;
+  bottom: 0; /* Align to bottom */
+  left: 0;
+  width: 100%; /* Full width */
+  height: auto; /* Maintain aspect ratio */
+  z-index: 0; /* Above background, behind content */
+}
+@keyframes rotateSun {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#Sun {
+  position: absolute;
+  top: -160px;
+  left: 65%;
+  width: 1000px;
+  height: auto;
+  animation: floatSun 5s ease-in-out infinite, rotateSun 30s linear infinite; /* Adjust time as needed */
+}
+        @keyframes moveClouds {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+#Cloud, #Cloud2, #Cloud3 {
+  position: absolute;
+  width: 50%; /* Adjust size */
+  z-index: 0; /* Above background */
+  animation: moveClouds 20s linear infinite; /* Adjust time as needed */
+}
+
+#Cloud {
+  top: 2%;
+  left: -7%;
+}
+
+#Cloud2 {
+  top: 15%;
+  left: 60%;
+}
+#Cloud3 {
+  top: 30%;
+  left: 30%;
+}

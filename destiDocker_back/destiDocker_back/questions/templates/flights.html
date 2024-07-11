@@ -6,203 +6,195 @@
     <link rel="stylesheet" href="{% static 'css/flights.css' %}">
 </head>
 <style>
-body {
-  font-family: sans-serif;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background-color: #86d0f8;
-}
-h1, h2 {
-  text-align: center;
-  margin: 10px 0;
-  font-weight: normal;
-}
-
-h1 {
-  font-size: 2em;
-  color: #333;
-}
-
-h2 {
-  font-size: 1.2em;
-  color: #000000;
-}
-
-.form-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px auto;
-  width: 50%;
-  background-color: #0084ff;
-  padding: 20px;
-  border-radius: 4px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.form-inline {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-bottom: 15px;
-}
-
-.form-inline label {
-  width: 120px;
-  margin-right: 10px;
-  font-weight: bold;
-}
-
-.form-inline input[type="text"],
-.form-inline input[type="date"] {
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  flex: 1;
-}
-
-.form-inline button {
-  background-color: #07065c; /* Green */
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.flight-results {
-  flex: 1; /* Take up remaining space */
-  overflow-y: auto; /* Enable scroll if needed */
-  margin-top: 20px;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 4px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.flight-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #ddd;
-}
-
-.flight-details {
-  flex: 2;
-}
-
-.flight-details div {
-  margin-bottom: 5px;
-}
-
-.flight-price {
-  font-weight: bold;
-  color: #333;
-}
-
-.choose-button {
-  background-color: #0066ff;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-.form-inline input[type="text"],
-.form-inline input[type="date"] {
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  flex: 1;
-  transition: border-color 0.3s ease-in-out; /* Add transition */
-}
-
-.form-inline input[type="text"]:focus,
-.form-inline input[type="date"]:focus {
-  border-color: #0080ff; /* Green on focus */
-}
-.form-inline button {
-  background-color: #0062ff; /* Green */
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease; /* Add transition */
-}
-
-.form-inline button:hover {
-  background-color: #0088ff; /* Darker green on hover */
-}
-.flight-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #ddd;
-  transition: background-color 0.3s ease, transform 0.3s ease; /* Add transitions */
-}
-
-.flight-card:hover {
-  background-color: #8eb0c1;
-  transform: scale(1.02); /* Slightly expand */
-}
-.flight-card {
-  /* ... other styles */
-  transition: transform 0.2s ease; /* Add transition */
-}
-
-.flight-card:active {
-  transform: translateY(-5px); /* Bounce down */
-}
-
-.flight-card:active + .choose-button {
-  transform: translateY(-5px); /* Bounce down the button too */
-}
-
-.no-flights {
-  font-size: x-large;
-  text-align: center;
-  font-weight: bold;
-  color: #333;
-}
-@keyframes planeFlyInAndOut {
-  0% {
-    transform: translateX(-100%); /* Start off-screen to the left */
+  body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #b2dcf2;
   }
-  50% {
-    transform: translateX(0); /* Fully on-screen */
+  .banner {
+    height: 250px; /* Adjust height as needed */
+    width: 100%; /* Adjust the width value as needed */
+    margin: 0; /* Center horizontally */
+    background-image: url("banner2.jpg"); /* Replace with your image path */
+    background-size: 400px; /* Stretch image to fill container */
+    background-position: center; /* Center the image */
   }
-  100% {
-    transform: translateX(100%); /* Move off-screen to the right */
+  
+  
+  h1, h2 {
+    text-align: center;
+    margin: 10px 0;
+    font-weight: normal;
   }
-}
-
-.plane-image {
-  position: relative;
-  top: 20px; /* Corrected to ensure it starts from the top */
-  left: 0;
-  width: 30%; /* Adjusted to cover the viewport width */
-  height: 100%; /* Adjusted to cover the viewport height */
-  object-fit: cover; /* Cover the entire page without losing aspect ratio */
-  z-index: -1; /* Behind the content */
-  animation: planeFlyInAndOut 10s infinite linear; /* Apply the animation */
-}
+  
+  h1 {
+    font-size: 2em;
+    color: #333;
+  }
+  
+  h2 {
+    font-size: 1.2em;
+    color: #000000;
+  }
+  
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px auto;
+    width: 50%;
+    background-color: #0084ff;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-inline {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+  
+  .form-inline label {
+    width: 120px;
+    margin-right: 10px;
+    font-weight: bold;
+  }
+  
+  .form-inline input[type="text"],
+  .form-inline input[type="date"] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    flex: 1;
+  }
+  
+  .form-inline button {
+    background-color: #07065c; /* Green */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .flight-results {
+    flex: 1; /* Take up remaining space */
+    overflow-y: auto; /* Enable scroll if needed */
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .flight-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .flight-details {
+    flex: 2;
+  }
+  
+  .flight-details div {
+    margin-bottom: 5px;
+  }
+  
+  .flight-price {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .choose-button {
+    background-color: #0066ff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .form-inline input[type="text"],
+  .form-inline input[type="date"] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    flex: 1;
+    transition: border-color 0.3s ease-in-out; /* Add transition */
+  }
+  
+  .form-inline input[type="text"]:focus,
+  .form-inline input[type="date"]:focus {
+    border-color: #0080ff; /* Green on focus */
+  }
+  .form-inline button {
+    background-color: #0062ff; /* Green */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Add transition */
+  }
+  
+  .form-inline button:hover {
+    background-color: #0088ff; /* Darker green on hover */
+  }
+  .flight-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Add transitions */
+  }
+  
+  .flight-card:hover {
+    background-color: #8eb0c1;
+    transform: scale(1.02); /* Slightly expand */
+  }
+  .flight-card {
+    /* ... other styles */
+    transition: transform 0.2s ease; /* Add transition */
+  }
+  
+  .flight-card:active {
+    transform: translateY(-5px); /* Bounce down */
+  }
+  
+  .flight-card:active + .choose-button {
+    transform: translateY(-5px); /* Bounce down the button too */
+  }
+  
+  .no-flights {
+    font-size: x-large;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+  }
 </style>
+
     <header class="header">
+        <div>
+            <img class="banner" rel="stylesheet" src="{% static 'images/banner2.png' %}">
+        </div>
         </header>
 
 </head>
 <body>
     <h1>Flights to {{ city_name }}, {{ country_name }}</h1>
+
     <form method="post" action="{% url 'flights' country_name city_name %}" class="form-inline">
-    
         {% csrf_token %}
         <label for="departureCity">Departure City (IATA code):</label>
         <input type="text" id="departureCityInput" name="departureCityInput" value="{{ request.session.departure_city }}" required>
@@ -219,9 +211,9 @@ h2 {
         <input type="hidden" name="arrival_city_name" value="{{ city_name }}">
         <button type="submit" class="choose-button">Update</button>
     </form>
-<div>
-            <img src="{% static 'images/Plane-1.png' %}" alt="Plane Image" class="plane-image">
-        </div>
+
+ 
+
     {% if flights %}
         <h2>Scheduled and Active Flights</h2>
         <div>
@@ -245,7 +237,7 @@ h2 {
                     </div>
                 </div>
                 <div class="flight-price">
-                    ${{ flight.price }}.00
+                    $200.00
                 </div>
                 <form method="post" action="{% url 'book_flight' %}">
                     {% csrf_token %}
@@ -254,7 +246,7 @@ h2 {
                     <input type="hidden" name="arrival_time" value="{{ flight.arrival.scheduled }}">
                     <input type="hidden" name="departure_airport" value="{{ flight.departure.airport }}">
                     <input type="hidden" name="arrival_airport" value="{{ flight.arrival.airport }}">
-                    <input type="hidden" name="price" value= {{ flight.price }}>
+                    <input type="hidden" name="price" value="200.00">
                     <button type="submit" class="choose-button">Choose This Flight</button>
                 </form>
             </div>

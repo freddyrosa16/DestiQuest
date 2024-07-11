@@ -61,6 +61,10 @@
         <label class="question" for="departureDate">Select Departure Date:</label>
         <input type="date" id="departureDate" name="departureDate" required>
         <br>
+        {% if error %}
+        <p style="color: red;">{{ error }}</p>
+        {% endif %}
+        <br>
         <input type="submit" value="Submit">
     </form>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">

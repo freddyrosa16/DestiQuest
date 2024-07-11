@@ -30,6 +30,8 @@ def questions(request):
         request.session['departure_date'] = departure_date
         request.session['return_date'] = return_date
         request.session['departure_city'] = departure_city
+        if not get_city_depp(departure_city):
+            return render(request, 'questions.html', {'error': 'Please enter a valid departure city.'})
         if not weather:
             return render(request, 'questions.html', {'error_message': 'Please select at least one weather type.'})
         return redirect('results')

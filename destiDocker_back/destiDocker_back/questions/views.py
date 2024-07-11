@@ -99,6 +99,9 @@ def flights(request, country_name, city_name):
 
             airports_arr = get_airports(country_data['country_iso2'], city_name)
 
+        if not airports_arr or not airports_depp:
+            return redirect('results')
+
         # Fetch flight information
         flight_url = 'http://api.aviationstack.com/v1/flights'
         flight_params = {

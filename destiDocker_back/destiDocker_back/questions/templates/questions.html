@@ -44,9 +44,6 @@
         <label for="temperate">Temperate</label><br>
         <input type="checkbox" id="mountainous" name="weather" value="mountainous">
         <label for="mountainous">Mountainous</label><br>
-        {% if error_message %}
-        <p style="color: red;">{{ error_message }}</p>
-        {% endif %}
         <label class="question" for="many_cities">How many cities would you like to see?</label>
         <input type="radio" id="cities_5" name="many_cities" value="5" required>
             <label for="cities_5">5</label>
@@ -61,8 +58,12 @@
         <label class="question" for="departureDate">Select Departure Date:</label>
         <input type="date" id="departureDate" name="departureDate" required>
         <br>
-        {% if error %}
-        <p style="color: red;">{{ error }}</p>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
         {% endif %}
         <br>
         <input type="submit" value="Submit">

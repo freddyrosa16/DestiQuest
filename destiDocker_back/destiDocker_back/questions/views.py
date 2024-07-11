@@ -8,6 +8,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .models import Booking
 import random
+from django.contrib import messages
 
 logger = logging.getLogger(__name__)
 
@@ -31,9 +32,11 @@ def questions(request):
         request.session['return_date'] = return_date
         request.session['departure_city'] = departure_city
         if not get_city_depp(departure_city):
-            return render(request, 'questions.html', {'error': 'Please enter a valid departure city.'})
+            messages.error(request, 'Please enter a valid departure city.')  # Usa messages.error
+            return render(request, 'questions.html')
         if not weather:
-            return render(request, 'questions.html', {'error_message': 'Please select at least one weather type.'})
+            messages.error(request, 'Please select at least one weather type.')  # Usa messages.error
+            return render(request, 'questions.html')
         return redirect('results')
     else:
         return render(request, 'questions.html')

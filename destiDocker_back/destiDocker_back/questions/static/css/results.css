@@ -89,16 +89,16 @@ border-bottom: 1px solid #e0e0e0; /* Separators for suggestions */
 }
 
 .autocomplete-suggestion:last-child {
-border-bottom: none; /* Remove bottom border for the last suggestion */
+border-bottom: none;
 }
 
 .autocomplete-suggestion:hover {
-background-color: #e6f7ff; /* Light blue on hover to match theme */
+background-color: #e6f7ff;
 }
 #countries-container {
 display: flex;
 flex-wrap: wrap;
-justify-content: space-between; /* Ajusta según sea necesario */
+justify-content: space-between;
 }
 
 .country-container {
@@ -138,13 +138,22 @@ align-items: center; /* Centra los elementos verticalmente */
 text-align: center; /* Asegura que el texto esté centrado */
 }
 .city-container a, .city-container p {
-flex: 1 0 48%; /* Ocupa el 48% del contenedor para dejar espacio entre columnas */
-margin: 15px; /* Añade un poco de margen para separación */
-font-size: 16px;
+    flex: 1 0 48%; /* Ocupa el 48% del contenedor para dejar espacio entre columnas */
+    margin: 15px; /* Añade un poco de margen para separación */
+    font-size: 16px;
+    text-decoration: none; /* Quita la decoración de los hipervínculos */
+    color: black; /* Color de texto original */
+}
+
+.city-container a:hover, .city-container p:hover {
+    color: #595959; /* Hace el texto un 15% más claro al pasar el mouse */
 }
 h2 {
 font-size: 16px;
 color: black;
+}
+h2:hover {
+color: #595959; /* Hace el texto un 15% más claro al pasar el mouse */
 }
 .country-container {
 margin: 5px 0; /* Reduce el margen superior e inferior a 5px */

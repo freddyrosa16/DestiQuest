@@ -8,6 +8,177 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/questions.css' %}">
+    <style>
+        html{
+            overflow: hidden;
+        }
+        body {
+        background-color: #a1e9ff; /* Light blue background */
+        position: relative; /* Needed for absolute positioning of children */
+        min-height: 100vh; /* Ensure full viewport height */
+        margin: 0; /* Remove default margin */
+        }
+        img {
+        -webkit-user-select: none; /* Chrome, Safari, Opera */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera, and Firefox */
+        }
+        /* Background image */
+        #Back {
+        position: relative;
+        width: 100%; /* Full width */
+        height: auto; /* Maintain aspect ratio */
+        bottom: 100px; /* Align to bottom */
+        z-index: -1; /* Ensure it's behind content */
+        }
+        
+        /* Floor image */
+        #Floor {
+        position: absolute;
+        bottom: 0; /* Align to bottom */
+        left: 0;
+        width: 100%; /* Full width */
+        height: auto; /* Maintain aspect ratio */
+        z-index: -1; /* Above background, behind content */
+        }
+        
+        @keyframes rotateSun {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+        
+        #Sun {
+          position: absolute;
+          top: -160px;
+          left: 65%;
+          width: 1000px;
+          height: auto;
+          animation: floatSun 5s ease-in-out infinite, rotateSun 30s linear infinite; /* Adjust time as needed */
+        }
+                @keyframes moveClouds {
+          from {
+            transform: translateX(-100%);
+          }
+          to {
+            transform: translateX(100%);
+          }
+        }
+        
+        #Cloud, #Cloud2, #Cloud3 {
+          position: absolute;
+          width: 50%; /* Adjust size */
+          z-index: 0; /* Above background */
+          animation: moveClouds 20s linear infinite; /* Adjust time as needed */
+        }
+        
+        #Cloud {
+          top: 2%;
+          left: -7%;
+        }
+        
+        #Cloud2 {
+          top: 15%;
+          left: 60%;
+        }
+        #Cloud3 {
+          top: 30%;
+          left: 30%;
+        }
+        
+        /* Autocomplete styles */
+        .autocomplete-suggestions {
+        background-color: transparent;
+        border: 1px solid #e0e0e000;
+        max-height: 150px;
+        overflow-y: auto;/* Light background to match the theme */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        border-radius: 4px; /* Rounded corners */
+        z-index: 1;
+        }
+        
+        .autocomplete-suggestion {
+        background-color: transparent;
+        padding: 8px;
+        cursor: pointer;
+        }
+        
+        .autocomplete-suggestion:last-child {
+        border-bottom: none; /* Remove bottom border for the last suggestion */
+        }
+        
+        .autocomplete-suggestion:hover {
+        color: #a1e9ff; /* Light blue on hover to match theme */
+        }
+        #Character {
+        width: 1200px; /* Adjust the width as needed */
+        height: auto; /* Maintain aspect ratio */
+        display: block; /* Use block layout instead of inline */
+        margin: 0 auto; /* Center the image horizontally */
+        border: 2px solid #ffffff00; /* Optional: adds a black border around the image */
+        position: absolute; /* Positioning relative to its nearest positioned ancestor */
+        top: 285px; /* Adjust the top position as needed */
+        left: 750px; /* Adjust the left position as needed */
+        }
+        #Form {
+        font: 20px Arial, sans-serif; /* Font style */
+        color: white;
+        text-align: center; /* Center align the form */
+        position: absolute; /* Posicionamiento absoluto respecto a #Back */
+        top: 40%; /* Centrar verticalmente */
+        left: 50%; /* Centrar horizontalmente */
+        transform: translate(-50%, -50%); 
+        }
+        fieldset {
+        border: none;
+        }
+        .question {
+        font-size: 16px; /* Larger font size */
+        font-weight: bold; /* Bold text */
+        margin: 10px 0; /* Add space above and below */
+        display: block; /* Use block layout */
+        font-family: 'Press Start 2P', cursive; /* Fuente estilo pixel */
+        color:  #0083B0;
+        }
+        h2 {
+        color: #a1e9ff;
+        font-size: 32px; /* Larger font size */
+        font-weight: bold; /* Bold text */
+        margin: 10px 0; /* Add space above and below */
+        display: block; /* Use block layout */
+        font-family: 'Press Start 2P', cursive; /* Fuente estilo pixel */
+        }
+        input[type="submit"] {
+        background-color: #a1e9ff; /* Color de fondo */
+        border: none;
+        color: dark blue;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 6px 2px;
+        cursor: pointer;
+        font-family: 'Press Start 2P', cursive; /* Fuente estilo pixel */
+        border: 3px solid #FFFFFF; /* Borde blanco para efecto pixel */
+        box-shadow: 0 0 0 2px #00A0E4; /* Sombra para profundizar el efecto pixel */
+        transition: background-color 0.3s, box-shadow 0.3s; /* Transición suave */
+        }
+        
+        input[type="submit"]:hover {
+        background-color: #0083B0; /* Color más oscuro al pasar el mouse */
+        box-shadow: 0 0 0 2px #0083B0; /* Sombra que coincide con el nuevo color de fondo */
+        }
+        label {
+        font-family: 'Press Start 2P', cursive; /* Fuente estilo pixel */
+        font-size: 16px;
+        color: #a1e9ff;
+        }
+    </style>
 </head>
 <body>
     <!-- Background and decorative images -->
@@ -72,6 +243,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var today = new Date().toISOString().split('T')[0];
+            document.getElementById('departureDate').setAttribute('min', today);
+          });
         $(document).ready(function() {
             $("#departureCityInput").on("input", function() {
                 var query = $(this).val();
